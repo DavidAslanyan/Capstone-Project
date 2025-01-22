@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     restart: always  
     depends_on:
-      - solaris-postgres
+      - postgres
     env_file:
       - .env
     ports:
@@ -19,11 +19,11 @@ services:
     networks:
       - myapp-network  
     
-  solaris-postgres:
+  postgres:
     image: postgres:latest
     restart: always
     ports:
-      - "5433:5432"
+      - "5436:5432"
     env_file:
       - .env
     volumes:
