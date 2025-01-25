@@ -51,7 +51,7 @@ export class UserModel extends CoreModel {
     return this.password;
   }
 
-  public getdifficultyLevel(): DifficultyLevelEnum {
+  public getDifficultyLevel(): DifficultyLevelEnum {
     return this.difficultyLevel;
   }
 

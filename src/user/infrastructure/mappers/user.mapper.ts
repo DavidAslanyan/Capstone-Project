@@ -25,7 +25,7 @@ export class UserMapper {
     entity.last_name = model.getLastName();
     entity.email = model.getEmail().getValue();
     entity.password = model.getPassword();
-    entity.difficulty_level = model.getdifficultyLevel();
+    entity.difficulty_level = model.getDifficultyLevel();
     entity.role = model.getRole();
     entity.status = model.getStatus();
     entity.created_at = model.getCreatedAt();
