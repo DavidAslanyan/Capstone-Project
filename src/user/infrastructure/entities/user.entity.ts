@@ -5,6 +5,7 @@ import { UserStatusEnum } from "../../domain/enums/user-status.enum";
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { AccessTokenEntity } from "./access-token.entity";
 import { RefreshTokenEntity } from "./refresh-token.entity";
+import { Exclude } from "class-transformer";
 
 @Entity('user')
 export class UserEntity {
@@ -29,6 +30,7 @@ export class UserEntity {
   email: string;
 
   @ApiProperty({ description: 'Password of the user' })
+  @Exclude()
   @Column({ type: 'varchar', length: 255 })
   password: string;
 
