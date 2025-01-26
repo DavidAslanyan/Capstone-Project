@@ -5,12 +5,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppDataSource } from './database/typeorm';
 import { CoreModule } from './core/infrastructure/modules/core.module';
 import { UserModule } from './user/infrastructure/modules/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
   imports: [
     CoreModule,
     UserModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       ...AppDataSource.options,
     }),

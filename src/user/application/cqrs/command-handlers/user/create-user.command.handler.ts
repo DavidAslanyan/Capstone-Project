@@ -35,7 +35,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
       );
       
       const email = command.createUserInputDto.email;
-      const userWithDuplicateEmail = await this.userRepository.getUserWithEmail(email);
+      const userWithDuplicateEmail = await this.userRepository.doesUserExistWithEmail(email);
 
       if (userWithDuplicateEmail) {
         throw new DuplicateValueException(
