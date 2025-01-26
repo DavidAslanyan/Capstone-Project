@@ -19,12 +19,21 @@ export class UserRepositoryHandler implements IUserRepository {
     return UserMapper.toModel(savedUserEntity);
   }
 
-  async getUserWithEmail(email: string): Promise<boolean> {
+  async getUserWithEmail(email: string): Promise<UserModel | null> {
+    const user = await this.repository.findOne({
+      where: { email }
+    });
+
+    return user ? UserMapper.toModel(user) : null;
+  }
+
+  async doesUserExistWithEmail(email: string): Promise<boolean> {
     const dublicateEmailCount = await this.repository.count({
       where: { email },
     });
 
     return dublicateEmailCount > 0;
   }
+
 }
 

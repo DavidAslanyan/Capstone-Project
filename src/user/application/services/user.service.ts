@@ -6,6 +6,9 @@ import { CreateUserCommand } from "../cqrs/commands/user/create-user.command";
 import { CustomResponse } from "../responses/custom-response.dto";
 import { USER_RESPONSE_MESSAGES } from "src/utilities/constants/response-messages";
 import { formatUserOutput } from "src/utilities/functions/format-user-output";
+import { LoginUserDto } from "../dtos/input/LoginUser.dto";
+import { LoginUserCommand } from "../cqrs/commands/user/login-user.command";
+import { TokenService } from "./token.service";
 
 
 @Injectable()
@@ -13,6 +16,7 @@ export class UserService {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
+    private readonly tokenService: TokenService
   ) {}
 
   async register(createUserDto: CreateUserDto) {
@@ -36,6 +40,40 @@ export class UserService {
       );
     }
     
+  }
+
+  async login(loginUserDto: LoginUserDto) {
+    try {
+      const userCommand = new LoginUserCommand(loginUserDto);
+      const user: UserModel = await this.commandBus.execute(userCommand);
+
+      const userEmail = user.getEmail();
+      const userId = user.getId();
+      const payload = { email: userEmail, sub: userId };
+
+      const accessToken = await this.tokenService.generateAccessToken(payload);
+      const refreshToken = await this.tokenService.generateRefreshToken(payload);
+
+      const userOutput = {
+        user: formatUserOutput(user),
+        accessToken,
+        refreshToken
+      };
+  
+      return new CustomResponse(
+        HttpStatus.ACCEPTED, 
+        userOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_login_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_login_fail
+      );
+    }
   }
 }
 
