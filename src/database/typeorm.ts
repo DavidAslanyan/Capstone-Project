@@ -1,27 +1,27 @@
 import { ConfigService } from '@nestjs/config';
-import { config } from 'dotenv';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSourceOptions } from 'typeorm';
 import { join } from 'path';
-
-config({ path: '.env' });
 
 export const createDataSourceOptions = (
   configService: ConfigService,
 ): DataSourceOptions => {
+  const databaseUrl = configService.get<string>('DATABASE_URL');
+  const parsedUrl = new URL(databaseUrl); 
+
   return {
     type: 'postgres',
-    host: configService.get<string>('DB_HOST'),
-    port: configService.get<number>('DB_PORT'),
-    username: configService.get<string>('POSTGRES_USER'),
-    password: configService.get<string>('POSTGRES_PASSWORD'),
-    database: configService.get<string>('POSTGRES_DB'),
+    host: parsedUrl.hostname,
+    port: Number(parsedUrl.port),
+    username: parsedUrl.username,
+    password: parsedUrl.password,
+    database: parsedUrl.pathname.split('/')[1],
     synchronize: false,
     logging: true,
     entities: [join(__dirname, '/../**/*.entity{.ts,.js}')],
     migrations: [join(__dirname, '/../database/migrations/*{.ts,.js}')],
     migrationsTableName: 'migrations',
     migrationsRun: false,
-    ssl: false,
+    ssl: true,
     extra: {
       max: 20,
       connectionTimeoutMillis: 20000,
@@ -29,7 +29,3 @@ export const createDataSourceOptions = (
   };
 };
 
-const configService = new ConfigService();
-export const AppDataSource = new DataSource(
-  createDataSourceOptions(configService),
-);

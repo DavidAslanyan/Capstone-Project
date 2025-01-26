@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppDataSource } from './database/typeorm';
+import { createDataSourceOptions } from './database/typeorm';
 import { CoreModule } from './core/infrastructure/modules/core.module';
 import { UserModule } from './user/infrastructure/modules/user.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 
 @Module({
@@ -15,8 +15,12 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({
-      ...AppDataSource.options,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService], 
+      useFactory: (configService: ConfigService) => {
+        return createDataSourceOptions(configService);
+      },
     }),
   ],
   controllers: [AppController],
