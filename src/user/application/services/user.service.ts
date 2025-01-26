@@ -9,6 +9,7 @@ import { formatUserOutput } from "src/utilities/functions/format-user-output";
 import { LoginUserDto } from "../dtos/input/LoginUser.dto";
 import { LoginUserCommand } from "../cqrs/commands/user/login-user.command";
 import { TokenService } from "./token.service";
+import { GetUserByIdQuery } from "../cqrs/queries/user/get-by-id.query";
 
 
 @Injectable()
@@ -72,6 +73,28 @@ export class UserService {
         null, 
         error.message, 
         USER_RESPONSE_MESSAGES.user_login_fail
+      );
+    }
+  }
+
+  async getUser(userId: string) {
+    try {
+      const userQuery = new GetUserByIdQuery(userId);
+      const user: UserModel = await this.queryBus.execute(userQuery);
+      const userOutput = formatUserOutput(user);
+
+      return new CustomResponse(
+        HttpStatus.FOUND, 
+        userOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_get_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_get_fail
       );
     }
   }

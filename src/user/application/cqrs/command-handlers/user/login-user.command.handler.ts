@@ -5,6 +5,7 @@ import { IUserRepository } from "src/user/domain/repositories/user.repository";
 import { ERROR_MESSAGES } from "src/utilities/constants/response-messages";
 import { PasswordService } from "src/user/application/services/password.service";
 import { UserModel } from "src/user/domain/models/user.model";
+import { UserStatusEnum } from "src/user/domain/enums/user-status.enum";
 
 
 @CommandHandler(LoginUserCommand)
@@ -29,7 +30,9 @@ export class LoginUserCommandHanlder implements ICommandHandler<LoginUserCommand
       throw new UnauthorizedException(ERROR_MESSAGES.invalid_credentials);
     }
 
-    return existingUser;
+    const loggedInUser = await this.userRepository.updateUserStatus(existingUser.getId(), UserStatusEnum.ACTIVE);
+
+    return loggedInUser;
   }
 }
 

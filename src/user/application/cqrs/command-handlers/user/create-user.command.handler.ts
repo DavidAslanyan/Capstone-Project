@@ -13,7 +13,7 @@ import { DuplicateValueException } from "src/user/application/exceptions/duplica
 @CommandHandler(CreateUserCommand)
 export class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand>{
   private readonly userDefaultRole = UserRoleEnum.USER;
-  private readonly userDefaultStatus = UserStatusEnum.ACTIVE;
+  private readonly userDefaultStatus = UserStatusEnum.INACTIVE;
 
   constructor(
     @Inject('IUserRepository')
@@ -32,7 +32,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
         command.createUserInputDto.difficultyLevel,
         this.userDefaultRole,
         this.userDefaultStatus
-      );
+      ); 
       
       const email = command.createUserInputDto.email;
       const userWithDuplicateEmail = await this.userRepository.doesUserExistWithEmail(email);
