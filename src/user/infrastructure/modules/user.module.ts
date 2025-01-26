@@ -17,6 +17,7 @@ import { ACCESS_TOKEN_EXPIRATION_TIME } from "src/utilities/constants/global-dat
 import { config } from "dotenv";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TokenService } from "src/user/application/services/token.service";
+import { GetUserByIdHandler } from "src/user/application/cqrs/query-handlers/user/get-by-id.query-handler";
 
 config({ path: '.env' });
 
@@ -46,6 +47,7 @@ config({ path: '.env' });
     TokenService,
     CreateUserCommandHandler,
     LoginUserCommandHanlder,
+    GetUserByIdHandler,
     {
       provide: 'IUserRepository',
       useClass: UserRepositoryHandler,
