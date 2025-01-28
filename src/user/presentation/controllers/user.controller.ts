@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Param, Post, UseFilters, UseInterceptors } from "@nestjs/common";
+import { Body, ClassSerializerInterceptor, Controller, Get, Param, Patch, Post, UseFilters, UseInterceptors } from "@nestjs/common";
 import { ApiCreateUser, ApiUserTags } from "src/swagger/user/user.swagger";
 import { CreateUserDto } from "src/user/application/dtos/input/CreateUser.dto";
 import { LoginUserDto } from "src/user/application/dtos/input/LoginUser.dto";
@@ -15,6 +15,11 @@ export class UserController {
     private readonly userService: UserService
   ) {}
 
+  @Get('/:id')
+  async getUser(@Param('id') userId: string) {
+    return this.userService.getUser(userId);
+  }
+
   @Post('/register')
   @ApiCreateUser()
   @UseInterceptors(ClassSerializerInterceptor)
@@ -29,10 +34,13 @@ export class UserController {
     return this.userService.login(loginUserDto);
   }
 
-  @Get('/:id')
-  async getUser(@Param('id') userId: string) {
-    return this.userService.getUser(userId);
+  @Patch('/progress')
+  @ApiCreateUser()
+  @UseInterceptors(ClassSerializerInterceptor)
+  async update(@Body() loginUserDto: LoginUserDto) {
+    return this.userService.login(loginUserDto);
   }
+
 
 }
 
