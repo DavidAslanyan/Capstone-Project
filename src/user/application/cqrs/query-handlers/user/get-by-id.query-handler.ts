@@ -5,6 +5,7 @@ import { UserModel } from 'src/user/domain/models/user.model';
 import { GetUserByIdQuery } from '../../queries/user/get-by-id.query';
 import { ERROR_MESSAGES } from 'src/utilities/constants/response-messages';
 
+
 @QueryHandler(GetUserByIdQuery)
 export class GetUserByIdHandler implements IQueryHandler<GetUserByIdQuery> {
   constructor(

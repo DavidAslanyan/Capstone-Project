@@ -2,7 +2,6 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { Inject, UnauthorizedException } from "@nestjs/common";
 import { IUserRepository } from "src/user/domain/repositories/user.repository";
 import { UserModel } from "src/user/domain/models/user.model";
-import { UserRoleEnum } from "src/user/domain/enums/user-role.enum";
 import { UserStatusEnum } from "src/user/domain/enums/user-status.enum";
 import { EmailValueObject } from "src/user/domain/value-objects/email.value-object";
 import { PasswordService } from "src/user/application/services/password.service";
@@ -12,7 +11,6 @@ import { ERROR_MESSAGES } from "src/utilities/constants/response-messages";
 
 @CommandHandler(UpdateUserCommand)
 export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserCommand>{
-  private readonly userDefaultRole = UserRoleEnum.USER;
   private readonly userDefaultStatus = UserStatusEnum.ACTIVE;
 
   constructor(

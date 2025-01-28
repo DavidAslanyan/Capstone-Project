@@ -51,7 +51,7 @@ export class UserRepositoryHandler implements IUserRepository {
 
   async getUserById(id: string): Promise<UserModel | null> {
     const user = await this.repository.findOne({
-      where: { id }
+      where: { id, status: UserStatusEnum.ACTIVE }
     });
 
     return user ? UserMapper.toModel(user) : null;

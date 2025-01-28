@@ -14,6 +14,7 @@ import { UpdateUserProgressDto } from "../dtos/input/update-user-progress.dto";
 import { UpdateProgressCommand } from "../cqrs/commands/user/update-progress.command";
 import { UpdateUserDto } from "../dtos/input/update-user.dto";
 import { UpdateUserCommand } from "../cqrs/commands/user/update-user.command";
+import { DeleteUserCommand } from "../cqrs/commands/user/delete-user.command";
 
 
 @Injectable()
@@ -121,6 +122,28 @@ export class UserService {
         null, 
         error.message, 
         USER_RESPONSE_MESSAGES.user_update_fail
+      );
+    }
+  }
+
+  async deleteUser(userId: string) {
+    try {
+      const userCommand = new DeleteUserCommand(userId);
+      const updatedUser: UserModel = await this.commandBus.execute(userCommand);
+      const updatedUserOutput = formatUserOutput(updatedUser);
+
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_delete_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_delete_fail
       );
     }
   }
