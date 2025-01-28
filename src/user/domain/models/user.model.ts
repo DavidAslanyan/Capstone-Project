@@ -12,6 +12,7 @@ export class UserModel extends CoreModel {
   private difficultyLevel: DifficultyLevelEnum;
   private role: UserRoleEnum;
   private status: UserStatusEnum;
+  private progress: number;
 
   constructor(
     firstName: string,
@@ -21,6 +22,7 @@ export class UserModel extends CoreModel {
     difficultyLevel: DifficultyLevelEnum,
     role: UserRoleEnum,
     status: UserStatusEnum,
+    progress: number,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -33,6 +35,7 @@ export class UserModel extends CoreModel {
     this.difficultyLevel = difficultyLevel;
     this.role = role;
     this.status = status;
+    this.progress = progress;
   }
 
   public getFirstName(): string {
@@ -63,6 +66,10 @@ export class UserModel extends CoreModel {
     return this.status;
   }
 
+  public getProgress(): number {
+    return this.progress;
+  }
+
   public setFirstName(firstName: string): void {
     this.firstName = firstName;
   }
@@ -89,6 +96,10 @@ export class UserModel extends CoreModel {
 
   public setStatus(status: UserStatusEnum): void {
     this.status = status;
+  }
+
+  public setProgress(progress: number): void {
+    this.progress = progress;
   }
 
 }

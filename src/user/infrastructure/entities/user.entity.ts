@@ -59,6 +59,14 @@ export class UserEntity {
   status: UserStatusEnum;
 
   @ApiProperty({
+    description: 'Progress of the user based on their points'
+  })
+  @Column({
+    type: 'integer',
+  })
+  progress: number;
+
+  @ApiProperty({
     description: 'Timestamp when the record was created',
     default: () => 'CURRENT_TIMESTAMP',
     example: '2025-01-19T12:34:56Z',

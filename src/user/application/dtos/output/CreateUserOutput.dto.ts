@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { DifficultyLevelEnum } from "src/user/domain/enums/difficulty-level.enum";
 import { UserRoleEnum } from "src/user/domain/enums/user-role.enum";
 
@@ -28,5 +28,9 @@ export class CreateUserOutputDto {
   @IsNotEmpty()
   @IsString()
   role: UserRoleEnum;
+
+  @IsNotEmpty()
+  @IsNumber()
+  progress: number;
 }
 

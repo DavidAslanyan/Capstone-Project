@@ -12,6 +12,7 @@ export class UserMapper {
       entity.difficulty_level,
       entity.role,
       entity.status,
+      entity.progress,
       entity.id,
       entity.created_at,
       entity.updated_at,
@@ -28,6 +29,7 @@ export class UserMapper {
     entity.difficulty_level = model.getDifficultyLevel();
     entity.role = model.getRole();
     entity.status = model.getStatus();
+    entity.progress = model.getProgress();
     entity.created_at = model.getCreatedAt();
     entity.updated_at = model.getUpdatedAt();
 

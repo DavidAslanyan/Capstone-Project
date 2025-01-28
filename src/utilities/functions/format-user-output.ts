@@ -8,7 +8,8 @@ export const formatUserOutput = (user: UserModel): CreateUserOutputDto => {
     lastName: user.getLastName(),
     email: user.getEmail().getValue(),
     difficultyLevel: user.getDifficultyLevel(),
-    role: user.getRole()
+    role: user.getRole(),
+    progress: user.getProgress()
   };
 
   return userOutput;

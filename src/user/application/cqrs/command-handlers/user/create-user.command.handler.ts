@@ -14,6 +14,7 @@ import { DuplicateValueException } from "src/user/application/exceptions/duplica
 export class CreateUserCommandHandler implements ICommandHandler<CreateUserCommand>{
   private readonly userDefaultRole = UserRoleEnum.USER;
   private readonly userDefaultStatus = UserStatusEnum.INACTIVE;
+  private readonly userInitialProgress = 0;
 
   constructor(
     @Inject('IUserRepository')
@@ -31,7 +32,8 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
         hashedPassword,
         command.createUserInputDto.difficultyLevel,
         this.userDefaultRole,
-        this.userDefaultStatus
+        this.userDefaultStatus,
+        this.userInitialProgress
       ); 
       
       const email = command.createUserInputDto.email;
