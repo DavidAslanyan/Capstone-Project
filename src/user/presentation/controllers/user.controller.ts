@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Param, Patch, Post, Put, UseFilters, UseInterceptors } from "@nestjs/common";
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Patch, Post, Put, UseFilters, UseInterceptors } from "@nestjs/common";
 import { ApiCreateUser, ApiUpdateUserProgress, ApiUserTags } from "src/swagger/user/user.swagger";
 import { CreateUserDto } from "src/user/application/dtos/input/create-user.dto";
 import { LoginUserDto } from "src/user/application/dtos/input/login-user.dto";
@@ -42,6 +42,11 @@ export class UserController {
     @Body() updateUserDto: UpdateUserDto
   ) {
     return this.userService.updateUser(updateUserDto, userId);
+  }
+
+  @Delete('/:userId')
+  async delete(@Param('userId') userId: string) {
+    return this.userService.deleteUser(userId);
   }
 
   @Patch('/progress/:userId')

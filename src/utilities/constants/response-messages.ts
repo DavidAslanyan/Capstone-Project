@@ -13,6 +13,9 @@ export const USER_RESPONSE_MESSAGES = {
 
   user_update_progress_success: "User progress updated successfully",
   user_update_progress_fail: "Failed to update user progress",
+
+  user_delete_success: "User deleted successfully",
+  user_delete_fail: "Failed to delete user",
 }
 
 export const ERROR_MESSAGES = {

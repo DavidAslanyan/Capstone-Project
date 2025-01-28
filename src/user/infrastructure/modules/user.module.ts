@@ -20,6 +20,7 @@ import { TokenService } from "src/user/application/services/token.service";
 import { GetUserByIdHandler } from "src/user/application/cqrs/query-handlers/user/get-by-id.query-handler";
 import { UpdateProgressCommandHanlder } from "src/user/application/cqrs/command-handlers/user/update-progress.command.handler";
 import { UpdateUserCommandHandler } from "src/user/application/cqrs/command-handlers/user/update-user.command.handler";
+import { DeleteUserCommandHandler } from "src/user/application/cqrs/command-handlers/user/delete-user.command.handler";
 
 config({ path: '.env' });
 
@@ -51,6 +52,7 @@ config({ path: '.env' });
     LoginUserCommandHanlder,
     UpdateProgressCommandHanlder,
     UpdateUserCommandHandler,
+    DeleteUserCommandHandler,
 
     GetUserByIdHandler,
     {
