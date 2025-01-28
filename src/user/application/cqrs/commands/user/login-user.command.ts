@@ -1,4 +1,4 @@
-import { LoginUserDto } from "src/user/application/dtos/input/LoginUser.dto";
+import { LoginUserDto } from "src/user/application/dtos/input/login-user.dto";
 
 
 export class LoginUserCommand {

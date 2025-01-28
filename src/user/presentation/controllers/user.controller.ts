@@ -1,7 +1,8 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Param, Patch, Post, UseFilters, UseInterceptors } from "@nestjs/common";
-import { ApiCreateUser, ApiUserTags } from "src/swagger/user/user.swagger";
-import { CreateUserDto } from "src/user/application/dtos/input/CreateUser.dto";
-import { LoginUserDto } from "src/user/application/dtos/input/LoginUser.dto";
+import { ApiCreateUser, ApiUpdateUserProgress, ApiUserTags } from "src/swagger/user/user.swagger";
+import { CreateUserDto } from "src/user/application/dtos/input/create-user.dto";
+import { LoginUserDto } from "src/user/application/dtos/input/login-user.dto";
+import { UpdateUserProgressDto } from "src/user/application/dtos/input/update-user-progress.dto";
 import { HttpExceptionFilter } from "src/user/application/exception-filter/http.exception-filter";
 import { UserService } from "src/user/application/services/user.service";
 import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
@@ -34,11 +35,13 @@ export class UserController {
     return this.userService.login(loginUserDto);
   }
 
-  @Patch('/progress')
-  @ApiCreateUser()
-  @UseInterceptors(ClassSerializerInterceptor)
-  async update(@Body() loginUserDto: LoginUserDto) {
-    return this.userService.login(loginUserDto);
+  @Patch('/progress/:userId')
+  @ApiUpdateUserProgress()
+  async update(
+    @Param('userId') userId: string,
+    @Body() updateUserProgress: UpdateUserProgressDto
+  ) {
+    return this.userService.updateUserProgress(updateUserProgress, userId);
   }
 
 
