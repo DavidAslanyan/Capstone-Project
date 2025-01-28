@@ -18,6 +18,7 @@ import { config } from "dotenv";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TokenService } from "src/user/application/services/token.service";
 import { GetUserByIdHandler } from "src/user/application/cqrs/query-handlers/user/get-by-id.query-handler";
+import { UpdateProgressCommandHanlder } from "src/user/application/cqrs/command-handlers/user/update-progress.command.handler";
 
 config({ path: '.env' });
 
@@ -47,6 +48,8 @@ config({ path: '.env' });
     TokenService,
     CreateUserCommandHandler,
     LoginUserCommandHanlder,
+    UpdateProgressCommandHanlder,
+
     GetUserByIdHandler,
     {
       provide: 'IUserRepository',

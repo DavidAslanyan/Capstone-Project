@@ -1,4 +1,4 @@
-import { CreateUserDto } from "src/user/application/dtos/input/CreateUser.dto";
+import { CreateUserDto } from "src/user/application/dtos/input/create-user.dto";
 
 
 export class CreateUserCommand {

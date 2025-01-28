@@ -204,6 +204,111 @@ export function ApiUpdateUser() {
   );
 }
 
+export function ApiUpdateUserProgress() {
+  return applyDecorators(
+    ApiOperation({ summary: 'Update user progress' }),
+    ApiHeader({
+      name: 'Authorization',
+      description: 'Bearer token for authentication',
+      required: true,
+    }),
+    ApiBody({
+      description: 'Progress value to update for the user',
+      examples: {
+        example: {
+          summary: 'Valid request example',
+          value: {
+            progress: 50, // Example progress value
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 200,
+      description: 'The user progress has been successfully updated.',
+      schema: {
+        example: {
+          statusCode: 200,
+          status: 'success',
+          data: {
+            id: '1e4a89f1-efc1-4b5b-8fcb-27b9b62c7b45',
+            firstName: 'string',
+            lastName: 'string',
+            email: 'example@gmail.com',
+            difficultyLevel: 'easy | medium | hard',
+            progress: 50, // Updated progress value
+            createdAt: '2024-08-19T12:34:56Z',
+            updatedAt: '2024-08-19T12:34:56Z',
+            status: 'active',
+          },
+          error: null,
+          message: 'User progress has been updated successfully!',
+        },
+      },
+    }),
+    ApiResponse({
+      status: 400,
+      description: 'Bad request. Validation errors.',
+      schema: {
+        example: {
+          statusCode: 400,
+          message: 'Bad Request',
+          errors: {
+            field: 'progress',
+            message: ['Progress must be a number between 0 and 100.'],
+          },
+        },
+      },
+    }),
+    ApiResponse({
+      status: 401,
+      description: 'Unauthorized. The request requires user authentication.',
+      schema: {
+        example: {
+          statusCode: 401,
+          message: 'Unauthorized',
+          error: 'Unauthorized',
+        },
+      },
+    }),
+    ApiResponse({
+      status: 403,
+      description:
+        'Forbidden. You do not have permission to access this resource.',
+      schema: {
+        example: {
+          statusCode: 403,
+          message: 'No permission',
+          error: 'Forbidden',
+        },
+      },
+    }),
+    ApiResponse({
+      status: 404,
+      description: 'User not found.',
+      schema: {
+        example: {
+          statusCode: 404,
+          message: 'User not found.',
+          error: 'Bad Request',
+        },
+      },
+    }),
+    ApiResponse({
+      status: 500,
+      description:
+        'Internal server error. An unexpected error occurred on the server.',
+      schema: {
+        example: {
+          statusCode: 500,
+          message: 'Internal server error',
+          error: 'Internal Server Error',
+        },
+      },
+    }),
+  );
+}
+
 export function ApiDeleteUserById() {
   return applyDecorators(
     ApiOperation({
