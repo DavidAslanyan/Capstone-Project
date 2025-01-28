@@ -8,6 +8,7 @@ export interface IUserRepository {
   doesUserExistWithEmail(email: string): Promise<boolean>;
   updateUserStatus(userId: string, status: UserStatusEnum): Promise<UserModel | null>,
   getUserById(id: string): Promise<UserModel | null>,
-  updateUserProgress(id: string, progress: number): Promise<UserModel | null>
+  updateUserProgress(id: string, progress: number): Promise<UserModel | null>,
+  updateUser(id: string, userModel: UserModel): Promise<UserModel>
 }
 

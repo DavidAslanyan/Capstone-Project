@@ -8,6 +8,9 @@ export const USER_RESPONSE_MESSAGES = {
   user_get_success: "User retreived successfully",
   user_get_fail: "Failed to retrieve user",
 
+  user_update_success: "User updated successfully",
+  user_update_fail: "Failed to update user",
+
   user_update_progress_success: "User progress updated successfully",
   user_update_progress_fail: "Failed to update user progress",
 }

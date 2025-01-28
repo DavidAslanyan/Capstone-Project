@@ -57,6 +57,20 @@ export class UserRepositoryHandler implements IUserRepository {
     return user ? UserMapper.toModel(user) : null;
   }
 
+  async updateUser(id: string, userModel: UserModel): Promise<UserModel> {
+    const user = await this.repository.findOne({
+      where: { id },
+    });
+    if (!user) {
+      return null; 
+    }
+
+    const userEntity = UserMapper.toEntity(userModel);
+    await this.repository.update(id, userEntity);
+
+    return userModel;
+  }
+
   async updateUserProgress(id: string, progress: number): Promise<UserModel | null> {
     const user = await this.repository.findOne({
       where: { id }

@@ -12,6 +12,8 @@ import { TokenService } from "./token.service";
 import { GetUserByIdQuery } from "../cqrs/queries/user/get-by-id.query";
 import { UpdateUserProgressDto } from "../dtos/input/update-user-progress.dto";
 import { UpdateProgressCommand } from "../cqrs/commands/user/update-progress.command";
+import { UpdateUserDto } from "../dtos/input/update-user.dto";
+import { UpdateUserCommand } from "../cqrs/commands/user/update-user.command";
 
 
 @Injectable()
@@ -97,6 +99,28 @@ export class UserService {
         null, 
         error.message, 
         USER_RESPONSE_MESSAGES.user_get_fail
+      );
+    }
+  }
+
+  async updateUser(updateUserDto: UpdateUserDto, userId: string) {
+    try {
+      const userCommand = new UpdateUserCommand(updateUserDto, userId);
+      const updatedUser: UserModel = await this.commandBus.execute(userCommand);
+      const updatedUserOutput = formatUserOutput(updatedUser);
+
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_update_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_update_fail
       );
     }
   }
