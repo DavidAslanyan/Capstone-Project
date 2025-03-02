@@ -59,12 +59,28 @@ export class UserEntity {
   status: UserStatusEnum;
 
   @ApiProperty({
-    description: 'Progress of the user based on their points'
+    description: 'Progress of the user'
   })
   @Column({
     type: 'integer',
   })
   progress: number;
+
+  @ApiProperty({
+    description: 'Coins of the user'
+  })
+  @Column({
+    type: 'integer',
+  })
+  coins: number;
+
+  @ApiProperty({
+    description: 'Current passed games by the user'
+  })
+  @Column({
+    type: 'integer',
+  })
+  games_passed: number;
 
   @ApiProperty({
     description: 'Timestamp when the record was created',

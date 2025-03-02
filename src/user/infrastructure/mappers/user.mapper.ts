@@ -13,6 +13,8 @@ export class UserMapper {
       entity.role,
       entity.status,
       entity.progress,
+      entity.coins,
+      entity.games_passed,
       entity.id,
       entity.created_at,
       entity.updated_at,
@@ -30,6 +32,8 @@ export class UserMapper {
     entity.role = model.getRole();
     entity.status = model.getStatus();
     entity.progress = model.getProgress();
+    entity.coins = model.getCoins();
+    entity.games_passed = model.getGamesPassed();
     entity.created_at = model.getCreatedAt();
     entity.updated_at = model.getUpdatedAt();
 
