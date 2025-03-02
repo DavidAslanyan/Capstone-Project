@@ -13,6 +13,8 @@ export class UserModel extends CoreModel {
   private role: UserRoleEnum;
   private status: UserStatusEnum;
   private progress: number;
+  private coins: number;
+  private gamesPassed: number;
 
   constructor(
     firstName: string,
@@ -23,6 +25,8 @@ export class UserModel extends CoreModel {
     role: UserRoleEnum,
     status: UserStatusEnum,
     progress: number,
+    coins: number,
+    gamesPassed: number,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -36,6 +40,8 @@ export class UserModel extends CoreModel {
     this.role = role;
     this.status = status;
     this.progress = progress;
+    this.coins = coins;
+    this.gamesPassed = gamesPassed;
   }
 
   public getFirstName(): string {
@@ -70,6 +76,14 @@ export class UserModel extends CoreModel {
     return this.progress;
   }
 
+  public getCoins(): number {
+    return this.coins;
+  }
+
+  public getGamesPassed(): number {
+    return this.gamesPassed;
+  }
+
   public setFirstName(firstName: string): void {
     this.firstName = firstName;
   }
@@ -100,6 +114,14 @@ export class UserModel extends CoreModel {
 
   public setProgress(progress: number): void {
     this.progress = progress;
+  }
+
+  public setCoins(coins: number): void {
+    this.coins = coins;
+  }
+
+  public setGamesPassed(gamesPassed: number): void {
+    this.gamesPassed = gamesPassed;
   }
 
 }
