@@ -19,5 +19,16 @@ export class ProgressService {
 
     return updatedUser;
   }
+
+  async addUserCoins(userId: string, coins: number) {
+    const user = await this.userRepository.getUserById(userId);
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    const updatedUser = await this.userRepository.addUserCoins(userId, coins);
+
+    return updatedUser;
+  }
 }
 

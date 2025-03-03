@@ -96,6 +96,21 @@ export class UserRepositoryHandler implements IUserRepository {
       return UserMapper.toModel(updatedUser);
     }
   }
+
+
+  async addUserCoins(id: string, coins: number): Promise<UserModel> {
+    const user = await this.repository.findOne({
+      where: { id }
+    });
+
+    if (user) {
+      user.coins = user.coins + coins < 0 ? 0 : user.coins + coins;
+      const updatedUser = await this.repository.save(user);
+
+      return UserMapper.toModel(updatedUser);
+    }
+  }
+  
   
 
 }
