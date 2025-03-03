@@ -9,7 +9,9 @@ export const formatUserOutput = (user: UserModel): CreateUserOutputDto => {
     email: user.getEmail().getValue(),
     difficultyLevel: user.getDifficultyLevel(),
     role: user.getRole(),
-    progress: user.getProgress()
+    progress: user.getProgress(),
+    coins: user.getCoins(),
+    gamesPassed: user.getGamesPassed()
   };
 
   return userOutput;
