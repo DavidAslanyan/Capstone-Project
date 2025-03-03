@@ -45,7 +45,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
 
       if (userWithDuplicateEmail) {
         throw new DuplicateValueException(
-          `User with email: '${email}' already exists`,
+          `User with email: '${email}' already exists, can you try a different email ?`,
         );
       }
 

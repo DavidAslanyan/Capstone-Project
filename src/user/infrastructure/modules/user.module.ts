@@ -21,6 +21,8 @@ import { GetUserByIdHandler } from "src/user/application/cqrs/query-handlers/use
 import { UpdateProgressCommandHanlder } from "src/user/application/cqrs/command-handlers/user/update-progress.command.handler";
 import { UpdateUserCommandHandler } from "src/user/application/cqrs/command-handlers/user/update-user.command.handler";
 import { DeleteUserCommandHandler } from "src/user/application/cqrs/command-handlers/user/delete-user.command.handler";
+import { ProgressService } from "src/user/application/services/progress.service";
+import { ProgressController } from "src/user/presentation/controllers/progress.controller";
 
 config({ path: '.env' });
 
@@ -43,9 +45,10 @@ config({ path: '.env' });
       }),
     }),
   ],
-  controllers: [UserController],
+  controllers: [UserController, ProgressController],
   providers: [
     UserService,
+    ProgressService,
     PasswordService,
     TokenService,
     CreateUserCommandHandler,

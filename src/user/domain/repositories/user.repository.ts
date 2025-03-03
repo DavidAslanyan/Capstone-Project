@@ -9,6 +9,7 @@ export interface IUserRepository {
   updateUserStatus(userId: string, status: UserStatusEnum): Promise<UserModel | null>,
   getUserById(id: string): Promise<UserModel | null>,
   updateUserProgress(id: string, progress: number): Promise<UserModel | null>,
-  updateUser(id: string, userModel: UserModel): Promise<UserModel>
+  updateUser(id: string, userModel: UserModel): Promise<UserModel>,
+  updateUserGamesPassed(id: string, gamesPassed: number): Promise<UserModel>
 }
 
