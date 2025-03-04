@@ -78,9 +78,11 @@ export class UserEntity {
     description: 'Current passed games by the user'
   })
   @Column({
-    type: 'integer',
+    type: 'text', 
+    array: true,
+    nullable: true
   })
-  games_passed: number;
+  games_passed: string[];
 
   @ApiProperty({
     description: 'Timestamp when the record was created',

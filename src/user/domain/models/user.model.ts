@@ -14,7 +14,7 @@ export class UserModel extends CoreModel {
   private status: UserStatusEnum;
   private progress: number;
   private coins: number;
-  private gamesPassed: number;
+  private gamesPassed: string[];
 
   constructor(
     firstName: string,
@@ -26,7 +26,7 @@ export class UserModel extends CoreModel {
     status: UserStatusEnum,
     progress: number,
     coins: number,
-    gamesPassed: number,
+    gamesPassed: string[],
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -80,7 +80,7 @@ export class UserModel extends CoreModel {
     return this.coins;
   }
 
-  public getGamesPassed(): number {
+  public getGamesPassed(): string[] {
     return this.gamesPassed;
   }
 
@@ -120,7 +120,7 @@ export class UserModel extends CoreModel {
     this.coins = coins;
   }
 
-  public setGamesPassed(gamesPassed: number): void {
+  public setGamesPassed(gamesPassed: string[]): void {
     this.gamesPassed = gamesPassed;
   }
 

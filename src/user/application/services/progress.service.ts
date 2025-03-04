@@ -1,5 +1,7 @@
-import { Inject, Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { IUserRepository } from "src/user/domain/repositories/user.repository";
+import { GAMES } from "src/utilities/constants/game-titles";
+import { ERROR_MESSAGES } from "src/utilities/constants/response-messages";
 
 
 @Injectable()
@@ -9,13 +11,17 @@ export class ProgressService {
     private readonly userRepository: IUserRepository,
   ) {}
   
-  async updateGamesPassed(userId: string, gamesPassed: number) {
+  async addGamePassed(userId: string, gamePassed: string) {
     const user = await this.userRepository.getUserById(userId);
     if (!user) {
       throw new NotFoundException("User not found");
     }
 
-    const updatedUser = await this.userRepository.updateUserGamesPassed(userId, gamesPassed);
+    if (!GAMES.includes(gamePassed)) {
+      throw new BadRequestException(ERROR_MESSAGES.invalid_game);
+    }
+
+    const updatedUser = await this.userRepository.addGamePassed(userId, gamePassed);
 
     return updatedUser;
   }

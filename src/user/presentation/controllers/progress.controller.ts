@@ -1,6 +1,6 @@
 import { Body, Controller, Post, UseFilters } from "@nestjs/common";
 import { AddUserCoinsDto } from "src/user/application/dtos/input/add-user-coins.dto";
-import { UpdateGamesPassedDto } from "src/user/application/dtos/input/update-games-passed.dto";
+import { AddGamePassedDto } from "src/user/application/dtos/input/update-games-passed.dto";
 import { HttpExceptionFilter } from "src/user/application/exception-filter/http.exception-filter";
 import { ProgressService } from "src/user/application/services/progress.service";
 import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
@@ -14,14 +14,14 @@ export class ProgressController {
   ) {}
 
   @Post('games')
-  async updateGamesPassed(@Body() updateGamesPasedDto: UpdateGamesPassedDto ) {
-    const userId = "fcae8e76-1a1d-4fba-ae7a-df9ab09b3d8b";
-    return this.progressService.updateGamesPassed(userId, updateGamesPasedDto.gamesPassed);
+  async updateGamesPassed(@Body() addGamePassedDto: AddGamePassedDto ) {
+    const userId = "7ac2fe64-c4e2-4bdc-8ed7-0afb3f039e74";
+    return this.progressService.addGamePassed(userId, addGamePassedDto.gamePassed);
   }
 
   @Post('coins')
   async addUserCoins(@Body() addUserCoinsDto: AddUserCoinsDto ) {
-    const userId = "fcae8e76-1a1d-4fba-ae7a-df9ab09b3d8b";
+    const userId = "7ac2fe64-c4e2-4bdc-8ed7-0afb3f039e74";
     return this.progressService.addUserCoins(userId, addUserCoinsDto.coins);
   }
 }

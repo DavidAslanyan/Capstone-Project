@@ -25,4 +25,6 @@ export const ERROR_MESSAGES = {
   tokens_expired: "Both tokens are invalid or expired. Please log in again.",
 
   user_not_found: "User not found",
+
+  invalid_game: "Invalid game name. The only games that can be added are: quiz, missingWord, wordShuffle, feedMonster"
 }

@@ -5,6 +5,7 @@ import { UserEntity } from "../entities/user.entity";
 import { Repository } from "typeorm";
 import { UserMapper } from "../mappers/user.mapper";
 import { UserStatusEnum } from "src/user/domain/enums/user-status.enum";
+import { BadRequestException, NotFoundException } from "@nestjs/common";
 
 
 export class UserRepositoryHandler implements IUserRepository {
@@ -84,17 +85,23 @@ export class UserRepositoryHandler implements IUserRepository {
     }
   }
 
-  async updateUserGamesPassed(id: string, gamesPassed: number): Promise<UserModel> {
+  async addGamePassed(id: string, gamePassed: string): Promise<UserModel> {
     const user = await this.repository.findOne({
       where: { id }
     });
 
-    if (user) {
-      user.games_passed = gamesPassed;
-      const updatedUser = await this.repository.save(user);
-
-      return UserMapper.toModel(updatedUser);
+    if (!user) {
+      throw new NotFoundException("User not found");
     }
+
+    if (user.games_passed.includes(gamePassed)) {
+      throw new BadRequestException("Game already added");
+    }
+
+    user.games_passed.push(gamePassed);
+    const updatedUser = await this.repository.save(user);
+
+    return UserMapper.toModel(updatedUser);
   }
 
 
