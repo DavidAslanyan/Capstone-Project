@@ -10,7 +10,8 @@ export interface IUserRepository {
   getUserById(id: string): Promise<UserModel | null>,
   updateUserProgress(id: string, progress: number): Promise<UserModel | null>,
   updateUser(id: string, userModel: UserModel): Promise<UserModel>,
-  addGamePassed(id: string, gamePassed: string): Promise<UserModel>
+  addGamePassed(id: string, gamePassed: string): Promise<UserModel>,
+  clearPassedGames(id: string): Promise<UserModel>
   addUserCoins(id: string, coins: number): Promise<UserModel>
 }
 

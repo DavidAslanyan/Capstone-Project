@@ -104,6 +104,21 @@ export class UserRepositoryHandler implements IUserRepository {
     return UserMapper.toModel(updatedUser);
   }
 
+  async clearPassedGames(id: string): Promise<UserModel> {
+    const user = await this.repository.findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.games_passed = [];
+    const updatedUser = await this.repository.save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
+
 
   async addUserCoins(id: string, coins: number): Promise<UserModel> {
     const user = await this.repository.findOne({

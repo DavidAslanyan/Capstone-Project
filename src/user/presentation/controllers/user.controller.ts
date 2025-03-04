@@ -50,15 +50,5 @@ export class UserController {
     return this.userService.deleteUser(userId);
   }
 
-  @Patch('/progress/:userId')
-  @ApiUpdateUserProgress()
-  async updateProgress(
-    @Param('userId') userId: string,
-    @Body() updateUserProgress: UpdateUserProgressDto
-  ) {
-    return this.userService.updateUserProgress(updateUserProgress, userId);
-  }
-
-
 }
 
