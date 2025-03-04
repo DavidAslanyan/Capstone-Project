@@ -85,6 +85,21 @@ export class UserRepositoryHandler implements IUserRepository {
     }
   }
 
+  async addUserProgress(id: string, progress: number): Promise<UserModel> {
+    const user = await this.repository.findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.progress += progress;
+    const updatedUser = await this.repository.save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
+
   async addGamePassed(id: string, gamePassed: string): Promise<UserModel> {
     const user = await this.repository.findOne({
       where: { id }
