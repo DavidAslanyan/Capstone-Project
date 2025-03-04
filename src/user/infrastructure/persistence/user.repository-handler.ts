@@ -147,6 +147,25 @@ export class UserRepositoryHandler implements IUserRepository {
       return UserMapper.toModel(updatedUser);
     }
   }
+
+  async subtractUserCoins(id: string, coins: number): Promise<UserModel> {
+    const user = await this.repository.findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    if (user.coins - coins < 0) {
+      throw new BadRequestException("Not enough coins");
+    }
+
+    user.coins = user.coins - coins;
+    const updatedUser = await this.repository.save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
   
   
 

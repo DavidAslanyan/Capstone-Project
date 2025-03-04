@@ -129,14 +129,54 @@ export class ProgressService {
   }
 
   async addUserCoins(userId: string, coins: number) {
-    const user = await this.userRepository.getUserById(userId);
-    if (!user) {
-      throw new NotFoundException("User not found");
+    try {
+      if (coins <= 0) {
+        throw new BadRequestException("Number must be hgiher than zero");
+      }
+  
+      const updatedUser = await this.userRepository.addUserCoins(userId, coins);
+      const updatedUserOutput = formatUserOutput(updatedUser);
+
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_add_coins_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_add_coins_fail
+      );
     }
+    
+  }
 
-    const updatedUser = await this.userRepository.addUserCoins(userId, coins);
+  async subtractUserCoins(userId: string, coins: number) {
+    try {
+      if (coins <= 0) {
+        throw new BadRequestException("Number must be hgiher than zero");
+      }
 
-    return updatedUser;
+      const updatedUser = await this.userRepository.subtractUserCoins(userId, coins);
+      const updatedUserOutput = formatUserOutput(updatedUser);
+
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_subtract_coins_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_subtract_coins_fail
+      );
+    }
   }
 }
 

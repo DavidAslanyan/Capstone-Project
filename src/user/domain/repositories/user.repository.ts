@@ -13,6 +13,7 @@ export interface IUserRepository {
   addGamePassed(id: string, gamePassed: string): Promise<UserModel>,
   clearPassedGames(id: string): Promise<UserModel>
   addUserCoins(id: string, coins: number): Promise<UserModel>,
-  addUserProgress(id: string, progress: number): Promise<UserModel>
+  addUserProgress(id: string, progress: number): Promise<UserModel>,
+  subtractUserCoins(id: string, coins: number): Promise<UserModel>
 }
 
