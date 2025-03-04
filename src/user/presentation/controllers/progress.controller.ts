@@ -23,6 +23,13 @@ export class ProgressController {
     return this.progressService.updateUserProgress(updateUserProgress, userId);
   }
 
+  @Patch('add')
+  @ApiUpdateUserProgress()
+  async addProgress(@Body() updateUserProgress: UpdateUserProgressDto) {
+    const userId = this.id;
+    return this.progressService.addProgress(userId, updateUserProgress);
+  }
+
   @Post('games')
   async updateGamesPassed(@Body() addGamePassedDto: AddGamePassedDto ) {
     const userId = this.id;

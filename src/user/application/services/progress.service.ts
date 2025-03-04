@@ -39,6 +39,37 @@ export class ProgressService {
       );
     }
   }
+
+  async addProgress(userId: string, updateUserProgressDto: UpdateUserProgressDto) {
+    try {
+      const user = await this.userRepository.getUserById(userId);
+      if (!user) {
+        throw new NotFoundException("User not found");
+      }
+  
+      if (updateUserProgressDto.progress <= 0) {
+        throw new BadRequestException("Progress must be hgiher than zero");
+      }
+  
+      const updatedUser = await this.userRepository.addUserProgress(userId, updateUserProgressDto.progress);
+      const updatedUserOutput = formatUserOutput(updatedUser);
+  
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_update_progress_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_update_progress_fail
+      );
+    }
+
+  }
   
   async addGamePassed(userId: string, gamePassed: string) {
     try {
