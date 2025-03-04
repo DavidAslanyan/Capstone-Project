@@ -42,10 +42,16 @@ export class ProgressController {
     return this.progressService.clearPassedGames(userId);
   }
 
-  @Post('coins')
+  @Patch('add-coins')
   async addUserCoins(@Body() addUserCoinsDto: AddUserCoinsDto ) {
     const userId = this.id;
     return this.progressService.addUserCoins(userId, addUserCoinsDto.coins);
+  }
+
+  @Patch('subtract-coins')
+  async subtractUserCoins(@Body() subtractUserCoinsDto: AddUserCoinsDto ) {
+    const userId = this.id;
+    return this.progressService.subtractUserCoins(userId, subtractUserCoinsDto.coins);
   }
 
 }

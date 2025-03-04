@@ -14,6 +14,12 @@ export const USER_RESPONSE_MESSAGES = {
   user_update_progress_success: "User progress updated successfully",
   user_update_progress_fail: "Failed to update user progress",
 
+  user_add_coins_success: "User coins added successfully",
+  user_add_coins_fail: "Failed to add coins",
+  
+  user_subtract_coins_success: "User coins subtracted successfully",
+  user_subtract_coins_fail: "Failed to subtract coins",
+
   user_add_game_success: "User game added successfully",
   user_add_game_fail: "Failed to add game",
 
