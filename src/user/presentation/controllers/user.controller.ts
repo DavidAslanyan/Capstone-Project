@@ -33,8 +33,8 @@ export class UserController {
   @Post('/login')
   @ApiCreateUser()
   @UseInterceptors(ClassSerializerInterceptor)
-  async login(@Body() loginUserDto: LoginUserDto, @Res() res: Response) {
-    return this.userService.login(loginUserDto, res);
+  async login(@Body() loginUserDto: LoginUserDto) {
+    return this.userService.login(loginUserDto);
   }
 
   @Put('/update/:userId')

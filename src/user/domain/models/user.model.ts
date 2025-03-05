@@ -15,6 +15,10 @@ export class UserModel extends CoreModel {
   private progress: number;
   private coins: number;
   private gamesPassed: string[];
+  private avatar: string;
+  private frame: string;
+  private avatarsPurchased: string[];
+  private framesPurchased: string[];
 
   constructor(
     firstName: string,
@@ -27,6 +31,10 @@ export class UserModel extends CoreModel {
     progress: number,
     coins: number,
     gamesPassed: string[],
+    avatar: string,
+    frame: string,
+    avatarsPurchased: string[],
+    framesPurchased: string[],
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -42,6 +50,10 @@ export class UserModel extends CoreModel {
     this.progress = progress;
     this.coins = coins;
     this.gamesPassed = gamesPassed;
+    this.avatar = avatar;
+    this.frame = frame;
+    this.avatarsPurchased = avatarsPurchased;
+    this.framesPurchased = framesPurchased;
   }
 
   public getFirstName(): string {
@@ -84,6 +96,22 @@ export class UserModel extends CoreModel {
     return this.gamesPassed;
   }
 
+  public getAvatar(): string {
+    return this.avatar;
+  }
+
+  public getFrame(): string {
+    return this.frame;
+  }
+
+  public getAvatarsPurchased(): string[] {
+    return this.avatarsPurchased;
+  }
+
+  public getFramesPurchased(): string[] {
+    return this.framesPurchased;
+  }
+
   public setFirstName(firstName: string): void {
     this.firstName = firstName;
   }
@@ -122,6 +150,22 @@ export class UserModel extends CoreModel {
 
   public setGamesPassed(gamesPassed: string[]): void {
     this.gamesPassed = gamesPassed;
+  }
+
+  public setAvatar(avatar: string): void {
+    this.avatar = avatar;
+  }
+
+  public setFrame(frame: string): void {
+    this.frame = frame;
+  }
+
+  public setAvatarsPurchased(avatars: string[]): void {
+    this.avatarsPurchased = avatars;
+  }
+
+  public setFramesPurchased(frames: string[]): void {
+    this.framesPurchased = frames;
   }
 
 }

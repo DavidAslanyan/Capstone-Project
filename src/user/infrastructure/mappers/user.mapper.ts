@@ -15,6 +15,10 @@ export class UserMapper {
       entity.progress,
       entity.coins,
       entity.games_passed,
+      entity.avatar,
+      entity.frame,
+      entity.avatars_purchased,
+      entity.frames_purchased,
       entity.id,
       entity.created_at,
       entity.updated_at,
@@ -34,6 +38,10 @@ export class UserMapper {
     entity.progress = model.getProgress();
     entity.coins = model.getCoins();
     entity.games_passed = model.getGamesPassed();
+    entity.avatar = model.getAvatar();
+    entity.frame = model.getFrame();
+    entity.avatars_purchased = model.getAvatarsPurchased();
+    entity.frames_purchased = model.getFramesPurchased();
     entity.created_at = model.getCreatedAt();
     entity.updated_at = model.getUpdatedAt();
 

@@ -5,6 +5,14 @@ import { DifficultyLevelEnum } from "src/user/domain/enums/difficulty-level.enum
 export class UpdateUserDto {
   @IsNotEmpty()
   @IsString()
+  avatarUrl: string;
+
+  @IsNotEmpty()
+  @IsString()
+  frameUrl: string;
+
+  @IsNotEmpty()
+  @IsString()
   firstName: string;
 
   @IsNotEmpty()

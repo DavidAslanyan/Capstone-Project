@@ -84,6 +84,34 @@ export class UserEntity {
   })
   games_passed: string[];
 
+  @ApiProperty({ description: 'Avatar url of the user' })
+  @Column({ type: 'varchar', length: 255 })
+  avatar: string;
+
+  @ApiProperty({ description: 'Frame of the user' })
+  @Column({ type: 'varchar', length: 255 })
+  frame: string;
+
+  @ApiProperty({
+    description: 'Avatars purchased by the user'
+  })
+  @Column({
+    type: 'text', 
+    array: true,
+    nullable: true
+  })
+  avatars_purchased: string[];
+
+  @ApiProperty({
+    description: 'Frames purchased by the user'
+  })
+  @Column({
+    type: 'text', 
+    array: true,
+    nullable: true
+  })
+  frames_purchased: string[];
+
   @ApiProperty({
     description: 'Timestamp when the record was created',
     default: () => 'CURRENT_TIMESTAMP',

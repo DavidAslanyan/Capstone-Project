@@ -44,7 +44,11 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
       this.userDefaultStatus,
       existingUser.getProgress(),
       existingUser.getCoins(),
-      existingUser.getGamesPassed()
+      existingUser.getGamesPassed(),
+      command.updateUserDto.avatarUrl,
+      command.updateUserDto.frameUrl,
+      [],
+      []
     );
 
     const updatedUser = await this.userRepository.updateUser(userId, userModel);
