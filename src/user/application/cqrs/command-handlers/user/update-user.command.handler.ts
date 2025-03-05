@@ -27,7 +27,12 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
       throw new UnauthorizedException(ERROR_MESSAGES.user_not_found);
     }
 
-    const hashedPassword = await this.passwordService.hashPassword(command.updateUserDto.password);
+    const passwordVerified = await this.passwordService.verifyPassword(command.updateUserDto.oldPassword, existingUser.getPassword());
+    if (!passwordVerified) {
+      throw new UnauthorizedException(ERROR_MESSAGES.invalid_credentials);
+    }
+
+    const hashedPassword = await this.passwordService.hashPassword(command.updateUserDto.newPassword);
 
     const userModel = new UserModel(
       command.updateUserDto.firstName,

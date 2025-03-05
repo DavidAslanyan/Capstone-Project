@@ -30,7 +30,7 @@ export class ProgressController {
     return this.progressService.addProgress(userId, updateUserProgress);
   }
 
-  @Post('games')
+  @Post('game')
   async updateGamesPassed(@Body() addGamePassedDto: AddGamePassedDto ) {
     const userId = this.id;
     return this.progressService.addGamePassed(userId, addGamePassedDto.gamePassed);

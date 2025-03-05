@@ -18,7 +18,11 @@ export class UpdateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  password: string;
+  oldPassword: string;
+
+  @IsNotEmpty()
+  @IsString()
+  newPassword: string;
 
   @IsNotEmpty()
   @IsString()
