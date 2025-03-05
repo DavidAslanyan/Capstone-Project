@@ -66,8 +66,14 @@ export class UserRepositoryHandler implements IUserRepository {
       return null; 
     }
 
-    const userEntity = UserMapper.toEntity(userModel);
-    await this.repository.update(id, userEntity);
+    user.first_name = userModel.getFirstName();
+    user.last_name = userModel.getLastName();
+    user.email = userModel.getEmail().getValue();
+    user.password = userModel.getPassword();
+    user.avatar = userModel.getAvatar();
+    user.frame = userModel.getFrame();
+
+    await this.repository.save(user);
 
     return userModel;
   }

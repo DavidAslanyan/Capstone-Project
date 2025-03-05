@@ -16,6 +16,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
   private readonly userDefaultStatus = UserStatusEnum.INACTIVE;
   private readonly initialProgress = 0;
   private readonly initialCoins = 0;
+  private readonly initialFrame = "def";
 
   constructor(
     @Inject('IUserRepository')
@@ -36,7 +37,11 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
         this.userDefaultStatus,
         this.initialProgress,
         this.initialCoins,
-        []
+        [],
+        command.createUserInputDto.avatarUrl,
+        this.initialFrame,
+        [command.createUserInputDto.avatarUrl],
+        [this.initialFrame]
       ); 
       
       const email = command.createUserInputDto.email;

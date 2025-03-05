@@ -15,7 +15,7 @@ import { UpdateProgressCommand } from "../cqrs/commands/user/update-progress.com
 import { UpdateUserDto } from "../dtos/input/update-user.dto";
 import { UpdateUserCommand } from "../cqrs/commands/user/update-user.command";
 import { DeleteUserCommand } from "../cqrs/commands/user/delete-user.command";
-import { Response } from 'express';
+
 
 @Injectable()
 export class UserService {
@@ -48,7 +48,7 @@ export class UserService {
     
   }
 
-  async login(loginUserDto: LoginUserDto, res: Response) {
+  async login(loginUserDto: LoginUserDto) {
     try {
       const userCommand = new LoginUserCommand(loginUserDto);
       const user: UserModel = await this.commandBus.execute(userCommand);
@@ -59,14 +59,6 @@ export class UserService {
 
       const accessToken = await this.tokenService.generateAccessToken(payload);
       const refreshToken = await this.tokenService.generateRefreshToken(payload);
-
-      const sevenDays = 7 * 24 * 60 * 60 * 1000;
-      res.cookie('refreshToken', refreshToken, {
-        httpOnly: true, 
-        secure: process.env.NODE_ENV === 'production', 
-        sameSite: 'strict', 
-        maxAge: sevenDays, 
-      });
       
       const userOutput = {
         user: formatUserOutput(user),

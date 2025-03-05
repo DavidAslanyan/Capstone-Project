@@ -22,6 +22,10 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  avatarUrl: string;
+
+  @IsNotEmpty()
+  @IsString()
   difficultyLevel: DifficultyLevelEnum;
 }
 
