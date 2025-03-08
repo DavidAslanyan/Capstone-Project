@@ -21,24 +21,28 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
   
   async execute(command: UpdateUserCommand): Promise<UserModel> {
     const userId = command.userId;
+    let newPassword = null;
 
     const existingUser = await this.userRepository.getUserById(userId);
     if (!existingUser) {
       throw new UnauthorizedException(ERROR_MESSAGES.user_not_found);
     }
 
-    const passwordVerified = await this.passwordService.verifyPassword(command.updateUserDto.oldPassword, existingUser.getPassword());
-    if (!passwordVerified) {
-      throw new UnauthorizedException(ERROR_MESSAGES.invalid_credentials);
+    if (command.updateUserDto.oldPassword || command.updateUserDto.newPassword) {
+      const passwordVerified = await this.passwordService.verifyPassword(command.updateUserDto.oldPassword, existingUser.getPassword());
+      if (!passwordVerified) {
+        throw new UnauthorizedException(ERROR_MESSAGES.invalid_credentials);
+      }
+  
+      newPassword = await this.passwordService.hashPassword(command.updateUserDto.newPassword);
     }
 
-    const hashedPassword = await this.passwordService.hashPassword(command.updateUserDto.newPassword);
-
+    
     const userModel = new UserModel(
       command.updateUserDto.firstName,
       command.updateUserDto.lastName,
       EmailValueObject.create(command.updateUserDto.email),
-      hashedPassword,
+      newPassword,
       command.updateUserDto.difficultyLevel,
       existingUser.getRole(),
       this.userDefaultStatus,
