@@ -2,6 +2,7 @@ import { UserModel } from "src/user/domain/models/user.model";
 import { UserEntity } from "../entities/user.entity";
 import { EmailValueObject } from "src/user/domain/value-objects/email.value-object";
 
+
 export class UserMapper {
   static toModel(entity: UserEntity): UserModel {
     return new UserModel(
@@ -17,8 +18,10 @@ export class UserMapper {
       entity.games_passed,
       entity.avatar,
       entity.frame,
+      entity.background,
       entity.avatars_purchased,
       entity.frames_purchased,
+      entity.backgrounds_purchased,
       entity.id,
       entity.created_at,
       entity.updated_at,
@@ -40,8 +43,10 @@ export class UserMapper {
     entity.games_passed = model.getGamesPassed();
     entity.avatar = model.getAvatar();
     entity.frame = model.getFrame();
+    entity.background = model.getBackground();
     entity.avatars_purchased = model.getAvatarsPurchased();
     entity.frames_purchased = model.getFramesPurchased();
+    entity.backgrounds_purchased = model.getBackgroundsPurchased();
     entity.created_at = model.getCreatedAt();
     entity.updated_at = model.getUpdatedAt();
 

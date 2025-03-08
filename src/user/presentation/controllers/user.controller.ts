@@ -1,13 +1,11 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Patch, Post, Put, Res, UseFilters, UseInterceptors } from "@nestjs/common";
-import { ApiCreateUser, ApiUpdateUserProgress, ApiUserTags } from "src/swagger/user/user.swagger";
+import { ApiCreateUser, ApiUserTags } from "src/swagger/user/user.swagger";
 import { CreateUserDto } from "src/user/application/dtos/input/create-user.dto";
 import { LoginUserDto } from "src/user/application/dtos/input/login-user.dto";
-import { UpdateUserProgressDto } from "src/user/application/dtos/input/update-user-progress.dto";
 import { UpdateUserDto } from "src/user/application/dtos/input/update-user.dto";
 import { HttpExceptionFilter } from "src/user/application/exception-filter/http.exception-filter";
 import { UserService } from "src/user/application/services/user.service";
 import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
-import { Response } from 'express';
 
 
 @ApiUserTags
