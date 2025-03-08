@@ -92,6 +92,10 @@ export class UserEntity {
   @Column({ type: 'varchar', length: 255 })
   frame: string;
 
+  @ApiProperty({ description: 'Background image of the user' })
+  @Column({ type: 'varchar', length: 255 })
+  background: string;
+
   @ApiProperty({
     description: 'Avatars purchased by the user'
   })
@@ -111,6 +115,16 @@ export class UserEntity {
     nullable: true
   })
   frames_purchased: string[];
+
+  @ApiProperty({
+    description: 'Backgrounds purchased by the user'
+  })
+  @Column({
+    type: 'text', 
+    array: true,
+    nullable: true
+  })
+  backgrounds_purchased: string[];
 
   @ApiProperty({
     description: 'Timestamp when the record was created',

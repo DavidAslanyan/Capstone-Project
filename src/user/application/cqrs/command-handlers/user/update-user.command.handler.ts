@@ -47,6 +47,8 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
       existingUser.getGamesPassed(),
       command.updateUserDto.avatarUrl,
       command.updateUserDto.frameUrl,
+      command.updateUserDto.backgroundUrl,
+      [],
       [],
       []
     );

@@ -13,6 +13,10 @@ export class UpdateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  backgroundUrl: string;
+
+  @IsNotEmpty()
+  @IsString()
   firstName: string;
 
   @IsNotEmpty()

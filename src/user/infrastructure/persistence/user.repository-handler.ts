@@ -72,6 +72,7 @@ export class UserRepositoryHandler implements IUserRepository {
     user.password = userModel.getPassword();
     user.avatar = userModel.getAvatar();
     user.frame = userModel.getFrame();
+    user.background = userModel.getBackground();
 
     await this.repository.save(user);
 
