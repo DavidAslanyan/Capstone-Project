@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { DifficultyLevelEnum } from "src/user/domain/enums/difficulty-level.enum";
 
 
@@ -28,16 +28,12 @@ export class UpdateUserDto {
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
   @IsString()
-  oldPassword: string;
+  @IsOptional()
+  oldPassword?: string;
 
-  @IsNotEmpty()
   @IsString()
-  newPassword: string;
-
-  @IsNotEmpty()
-  @IsString()
-  difficultyLevel: DifficultyLevelEnum;
+  @IsOptional()
+  newPassword?: string;
 }
 

@@ -23,6 +23,7 @@ import { UpdateUserCommandHandler } from "src/user/application/cqrs/command-hand
 import { DeleteUserCommandHandler } from "src/user/application/cqrs/command-handlers/user/delete-user.command.handler";
 import { ProgressService } from "src/user/application/services/progress.service";
 import { ProgressController } from "src/user/presentation/controllers/progress.controller";
+import { AddStoreItemCommandHandler } from "src/user/application/cqrs/command-handlers/progress/add-store-item.command-handler";
 
 config({ path: '.env' });
 
@@ -56,6 +57,7 @@ config({ path: '.env' });
     UpdateProgressCommandHanlder,
     UpdateUserCommandHandler,
     DeleteUserCommandHandler,
+    AddStoreItemCommandHandler,
 
     GetUserByIdHandler,
     {

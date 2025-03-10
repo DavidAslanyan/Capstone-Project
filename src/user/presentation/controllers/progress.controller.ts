@@ -1,5 +1,6 @@
 import { Body, Controller, Patch, Post, Put, UseFilters } from "@nestjs/common";
 import { ApiUpdateUserProgress } from "src/swagger/user/user.swagger";
+import { PurchaseStoreItemDto } from "src/user/application/dtos/input/purchase-store-item.dto";
 import { AddUserCoinsDto } from "src/user/application/dtos/input/add-user-coins.dto";
 import { AddGamePassedDto } from "src/user/application/dtos/input/update-games-passed.dto";
 import { UpdateUserProgressDto } from "src/user/application/dtos/input/update-user-progress.dto";
@@ -11,7 +12,7 @@ import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
 @UseFilters(HttpExceptionFilter)
 @Controller(`${BASE_ROUTE}/progress`)
 export class ProgressController {
-  private readonly id = "7ac2fe64-c4e2-4bdc-8ed7-0afb3f039e74";
+  private readonly id = "6cadc416-677a-4aaf-8a69-fdbf53b8d761";
   constructor(
     private readonly progressService: ProgressService
   ) {}
@@ -52,6 +53,12 @@ export class ProgressController {
   async subtractUserCoins(@Body() subtractUserCoinsDto: AddUserCoinsDto ) {
     const userId = this.id;
     return this.progressService.subtractUserCoins(userId, subtractUserCoinsDto.coins);
+  }
+
+  @Post('purchase')
+  async purchaseStoreItem(@Body() purchaseStoreItemDto: PurchaseStoreItemDto) {
+    const userId = this.id;
+    return this.progressService.purchaseStoreItem(userId, purchaseStoreItemDto)
   }
 
 }

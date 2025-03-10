@@ -2,7 +2,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { UserModel } from "src/user/domain/models/user.model";
 import { IUserRepository } from "src/user/domain/repositories/user.repository";
 import { UserEntity } from "../entities/user.entity";
-import { Repository } from "typeorm";
+import { QueryRunner, Repository } from "typeorm";
 import { UserMapper } from "../mappers/user.mapper";
 import { UserStatusEnum } from "src/user/domain/enums/user-status.enum";
 import { BadRequestException, NotFoundException } from "@nestjs/common";
@@ -176,6 +176,71 @@ export class UserRepositoryHandler implements IUserRepository {
 
     return UserMapper.toModel(updatedUser);
   }
+
+  async addPurchasedAvatar(id: string, avatar: string, queryRunner: QueryRunner): Promise<UserModel> {
+    const user = await queryRunner.manager.getRepository(UserEntity).findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.avatars_purchased.push(avatar);
+    const updatedUser = await queryRunner.manager.getRepository(UserEntity).save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
+
+  async addPurchasedFrame(id: string, frame: string, queryRunner: QueryRunner): Promise<UserModel> {
+    const user = await queryRunner.manager.getRepository(UserEntity).findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.frames_purchased.push(frame);
+    const updatedUser = await queryRunner.manager.getRepository(UserEntity).save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
+
+  async addPurchasedBackground(id: string, background: string, queryRunner: QueryRunner): Promise<UserModel> {
+    const user = await queryRunner.manager.getRepository(UserEntity).findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.backgrounds_purchased.push(background);
+    const updatedUser = await queryRunner.manager.getRepository(UserEntity).save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
+
+  async purchaseStoreItemWithCoins(id: string, coins: number, queryRunner: QueryRunner): Promise<UserModel> {
+    const user = await queryRunner.manager.getRepository(UserEntity).findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    if (user.coins - coins < 0) {
+      throw new BadRequestException("Not enough coins");
+    }
+
+    user.coins = user.coins - coins;
+    const updatedUser = await queryRunner.manager.getRepository(UserEntity).save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
+
   
   
 

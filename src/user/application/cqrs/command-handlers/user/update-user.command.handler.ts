@@ -7,6 +7,7 @@ import { EmailValueObject } from "src/user/domain/value-objects/email.value-obje
 import { PasswordService } from "src/user/application/services/password.service";
 import { UpdateUserCommand } from "../../commands/user/update-user.command";
 import { ERROR_MESSAGES } from "src/utilities/constants/response-messages";
+import { DifficultyLevelEnum } from "src/user/domain/enums/difficulty-level.enum";
 
 
 @CommandHandler(UpdateUserCommand)
@@ -43,7 +44,7 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
       command.updateUserDto.lastName,
       EmailValueObject.create(command.updateUserDto.email),
       newPassword,
-      command.updateUserDto.difficultyLevel,
+      DifficultyLevelEnum.EASY,
       existingUser.getRole(),
       this.userDefaultStatus,
       existingUser.getProgress(),
