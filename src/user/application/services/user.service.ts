@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
+import { BadRequestException, HttpStatus, Inject, Injectable } from "@nestjs/common";
 import { CreateUserDto } from "../dtos/input/create-user.dto";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { UserModel } from "src/user/domain/models/user.model";
@@ -15,11 +15,16 @@ import { UpdateProgressCommand } from "../cqrs/commands/user/update-progress.com
 import { UpdateUserDto } from "../dtos/input/update-user.dto";
 import { UpdateUserCommand } from "../cqrs/commands/user/update-user.command";
 import { DeleteUserCommand } from "../cqrs/commands/user/delete-user.command";
+import { ChangeDifficultyLevelDto } from "../dtos/input/change-difficulty-level.dto";
+import { IUserRepository } from "src/user/domain/repositories/user.repository";
+import { DifficultyLevelEnum } from "src/user/domain/enums/difficulty-level.enum";
 
 
 @Injectable()
 export class UserService {
   constructor(
+    @Inject('IUserRepository')
+    private readonly userRepository: IUserRepository,
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
     private readonly tokenService: TokenService
@@ -168,6 +173,37 @@ export class UserService {
         USER_RESPONSE_MESSAGES.user_update_progress_fail
       );
     }
+  }
+
+
+  async changeDiffcultyLevel(userId: string, difficultyLevelDto: ChangeDifficultyLevelDto) {
+    try {
+      const { level } = difficultyLevelDto;
+      if (level !== DifficultyLevelEnum.EASY &&
+          level !== DifficultyLevelEnum.MEDIUM &&
+          level !== DifficultyLevelEnum.HARD
+      ) {
+        throw new BadRequestException("Incorrect Difficlty level");
+      }
+  
+      const updatedUserWithDifficulty = await this.userRepository.changeDifficultyLevel(userId, level);
+      const updatedUserOutput = formatUserOutput(updatedUserWithDifficulty);
+
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.difficulty_change_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.difficulty_change_fail
+      );
+    }
+    
   }
 }
 

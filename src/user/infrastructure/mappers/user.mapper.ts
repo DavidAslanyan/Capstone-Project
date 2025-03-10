@@ -15,6 +15,7 @@ export class UserMapper {
       entity.status,
       entity.progress,
       entity.coins,
+      entity.points,
       entity.games_passed,
       entity.avatar,
       entity.frame,
@@ -40,6 +41,7 @@ export class UserMapper {
     entity.status = model.getStatus();
     entity.progress = model.getProgress();
     entity.coins = model.getCoins();
+    entity.points = model.getPoints();
     entity.games_passed = model.getGamesPassed();
     entity.avatar = model.getAvatar();
     entity.frame = model.getFrame();

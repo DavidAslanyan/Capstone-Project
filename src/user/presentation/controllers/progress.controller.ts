@@ -12,7 +12,7 @@ import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
 @UseFilters(HttpExceptionFilter)
 @Controller(`${BASE_ROUTE}/progress`)
 export class ProgressController {
-  private readonly id = "6cadc416-677a-4aaf-8a69-fdbf53b8d761";
+  private readonly id = "b0f7c193-9e89-44eb-9891-aeec0b384159";
   constructor(
     private readonly progressService: ProgressService
   ) {}

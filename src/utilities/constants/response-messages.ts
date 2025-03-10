@@ -30,7 +30,10 @@ export const USER_RESPONSE_MESSAGES = {
   user_delete_fail: "Failed to delete user",
 
   item_purchase_success: "Store item purchased successfully",
-  item_purchase_fail: "Failed to purchase store item"
+  item_purchase_fail: "Failed to purchase store item",
+
+  difficulty_change_success: "Diffuculty level changed successfully",
+  difficulty_change_fail: "Failed to change diffuculty level",
 }
 
 export const ERROR_MESSAGES = {
