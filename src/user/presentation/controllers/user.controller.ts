@@ -35,7 +35,7 @@ export class UserController {
     return this.userService.login(loginUserDto);
   }
 
-  @Put('/update/:userId')
+  @Patch('/update/:userId')
   async update(
     @Param('userId') userId: string,
     @Body() updateUserDto: UpdateUserDto

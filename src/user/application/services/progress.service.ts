@@ -8,6 +8,11 @@ import { UserModel } from "src/user/domain/models/user.model";
 import { formatUserOutput } from "src/utilities/functions/format-user-output";
 import { UpdateUserProgressDto } from "../dtos/input/update-user-progress.dto";
 import { CommandBus } from "@nestjs/cqrs";
+import { PurchaseStoreItemDto } from "../dtos/input/purchase-store-item.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { UserEntity } from "src/user/infrastructure/entities/user.entity";
+import { Repository } from "typeorm";
+import { AddStoreItemCommand } from "../cqrs/commands/progress/add-store-item.command";
 
 
 @Injectable()
@@ -15,6 +20,8 @@ export class ProgressService {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
+    @InjectRepository(UserEntity)
+    private readonly userDirectRepository: Repository<UserEntity>,
     private readonly commandBus: CommandBus,
   ) {}
 
@@ -178,5 +185,44 @@ export class ProgressService {
       );
     }
   }
+
+  async purchaseStoreItem(userId: string, purchaseStoreItemDto: PurchaseStoreItemDto) {
+    const queryRunner = this.userDirectRepository.manager.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      await this.userRepository.purchaseStoreItemWithCoins(userId, purchaseStoreItemDto.coins, queryRunner);
+
+      const addStoreItemCommand = new AddStoreItemCommand(
+        userId,
+        purchaseStoreItemDto,
+        queryRunner,
+      );
+      const purchasedStoredUser: UserModel = await this.commandBus.execute(addStoreItemCommand);
+      const updatedUserOutput = formatUserOutput(purchasedStoredUser);
+
+      await queryRunner.commitTransaction();
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.item_purchase_success
+      );
+    } catch(error) {
+      await queryRunner.rollbackTransaction();
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.item_purchase_fail
+      );
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+
 }
+
 

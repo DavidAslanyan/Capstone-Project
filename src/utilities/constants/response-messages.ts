@@ -28,6 +28,9 @@ export const USER_RESPONSE_MESSAGES = {
 
   user_delete_success: "User deleted successfully",
   user_delete_fail: "Failed to delete user",
+
+  item_purchase_success: "Store item purchased successfully",
+  item_purchase_fail: "Failed to purchase store item"
 }
 
 export const ERROR_MESSAGES = {
