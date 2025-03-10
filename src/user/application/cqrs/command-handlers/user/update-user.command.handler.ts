@@ -49,6 +49,7 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
       this.userDefaultStatus,
       existingUser.getProgress(),
       existingUser.getCoins(),
+      existingUser.getPoints(),
       existingUser.getGamesPassed(),
       command.updateUserDto.avatarUrl,
       command.updateUserDto.frameUrl,

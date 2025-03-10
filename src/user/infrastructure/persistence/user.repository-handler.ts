@@ -6,6 +6,7 @@ import { QueryRunner, Repository } from "typeorm";
 import { UserMapper } from "../mappers/user.mapper";
 import { UserStatusEnum } from "src/user/domain/enums/user-status.enum";
 import { BadRequestException, NotFoundException } from "@nestjs/common";
+import { DifficultyLevelEnum } from "src/user/domain/enums/difficulty-level.enum";
 
 
 export class UserRepositoryHandler implements IUserRepository {
@@ -237,6 +238,21 @@ export class UserRepositoryHandler implements IUserRepository {
 
     user.coins = user.coins - coins;
     const updatedUser = await queryRunner.manager.getRepository(UserEntity).save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
+
+  async changeDifficultyLevel(userId: string, level: DifficultyLevelEnum): Promise<UserModel> {
+    const user = await this.repository.findOne({
+      where: { id: userId }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.difficulty_level = level;
+    const updatedUser = await this.repository.save(user);
 
     return UserMapper.toModel(updatedUser);
   }

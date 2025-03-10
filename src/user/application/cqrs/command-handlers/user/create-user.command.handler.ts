@@ -16,6 +16,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
   private readonly userDefaultStatus = UserStatusEnum.INACTIVE;
   private readonly initialProgress = 0;
   private readonly initialCoins = 0;
+  private readonly initialPoints = 0;
   private readonly initialFrame = "def";
   private readonly initialBackground = "def"
 
@@ -38,6 +39,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
         this.userDefaultStatus,
         this.initialProgress,
         this.initialCoins,
+        this.initialPoints,
         [],
         command.createUserInputDto.avatarUrl,
         this.initialFrame,

@@ -14,6 +14,7 @@ export class UserModel extends CoreModel {
   private status: UserStatusEnum;
   private progress: number;
   private coins: number;
+  private points: number;
   private gamesPassed: string[];
   private avatar: string;
   private frame: string;
@@ -32,6 +33,7 @@ export class UserModel extends CoreModel {
     status: UserStatusEnum,
     progress: number,
     coins: number,
+    points: number,
     gamesPassed: string[],
     avatar: string,
     frame: string,
@@ -53,6 +55,7 @@ export class UserModel extends CoreModel {
     this.status = status;
     this.progress = progress;
     this.coins = coins;
+    this.points = points;
     this.gamesPassed = gamesPassed;
     this.avatar = avatar;
     this.frame = frame;
@@ -96,6 +99,10 @@ export class UserModel extends CoreModel {
 
   public getCoins(): number {
     return this.coins;
+  }
+
+  public getPoints(): number {
+    return this.points;
   }
 
   public getGamesPassed(): string[] {
@@ -160,6 +167,10 @@ export class UserModel extends CoreModel {
 
   public setCoins(coins: number): void {
     this.coins = coins;
+  }
+
+  public setPoints(points: number): void {
+    this.points = points;
   }
 
   public setGamesPassed(gamesPassed: string[]): void {

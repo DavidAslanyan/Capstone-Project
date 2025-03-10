@@ -67,6 +67,14 @@ export class UserEntity {
   progress: number;
 
   @ApiProperty({
+    description: 'Points of the user'
+  })
+  @Column({
+    type: 'integer',
+  })
+  points: number;
+
+  @ApiProperty({
     description: 'Coins of the user'
   })
   @Column({
