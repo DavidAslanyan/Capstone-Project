@@ -108,6 +108,27 @@ export class UserService {
       );
     }
   }
+  
+  async getUsersList() {
+    try {
+      const users = await this.userRepository.getUsersList();
+      const usersOutput = users.map((user) => formatUserOutput(user));
+
+      return new CustomResponse(
+        HttpStatus.FOUND, 
+        usersOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_get_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_get_fail
+      );
+    }
+  }
 
   async updateUser(updateUserDto: UpdateUserDto, userId: string) {
     try {
@@ -174,7 +195,6 @@ export class UserService {
       );
     }
   }
-
 
   async changeDiffcultyLevel(userId: string, difficultyLevelDto: ChangeDifficultyLevelDto) {
     try {

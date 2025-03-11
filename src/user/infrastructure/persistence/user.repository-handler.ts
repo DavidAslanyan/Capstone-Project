@@ -59,6 +59,15 @@ export class UserRepositoryHandler implements IUserRepository {
     return user ? UserMapper.toModel(user) : null;
   }
 
+  async getUsersList(): Promise<UserModel[]> {
+    const users = await this.repository.find({
+      where: { status: UserStatusEnum.ACTIVE },
+      order: { points: "DESC" }
+    });
+  
+    return users.map(UserMapper.toModel);
+  }
+
   async updateUser(id: string, userModel: UserModel): Promise<UserModel> {
     const user = await this.repository.findOne({
       where: { id },
@@ -144,7 +153,6 @@ export class UserRepositoryHandler implements IUserRepository {
 
     return UserMapper.toModel(updatedUser);
   }
-
 
   async addUserCoins(id: string, coins: number): Promise<UserModel> {
     const user = await this.repository.findOne({
