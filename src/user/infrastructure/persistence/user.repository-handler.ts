@@ -257,6 +257,21 @@ export class UserRepositoryHandler implements IUserRepository {
     return UserMapper.toModel(updatedUser);
   }
 
+
+  async addPoints(id: string, points: number): Promise<UserModel> {
+    const user = await this.repository.findOne({
+      where: { id }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.points = user.points + points;
+    const updatedUser = await this.repository.save(user);
+
+    return UserMapper.toModel(updatedUser);
+  }
   
   
 

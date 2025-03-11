@@ -7,6 +7,7 @@ import { UpdateUserProgressDto } from "src/user/application/dtos/input/update-us
 import { HttpExceptionFilter } from "src/user/application/exception-filter/http.exception-filter";
 import { ProgressService } from "src/user/application/services/progress.service";
 import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
+import { AddUserPointsDto } from "src/user/application/dtos/input/add-user-ponts.dto";
 
 
 @UseFilters(HttpExceptionFilter)
@@ -59,6 +60,12 @@ export class ProgressController {
   async purchaseStoreItem(@Body() purchaseStoreItemDto: PurchaseStoreItemDto) {
     const userId = this.id;
     return this.progressService.purchaseStoreItem(userId, purchaseStoreItemDto)
+  }
+
+  @Patch('add-points')
+  async addUserPoints(@Body() addUserPointsDto: AddUserPointsDto ) {
+    const userId = this.id;
+    return this.progressService.addUserPoints(userId, addUserPointsDto.points);
   }
 
 }

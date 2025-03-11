@@ -20,6 +20,7 @@ export interface IUserRepository {
   addPurchasedFrame(id: string, frame: string, queryRunner: QueryRunner): Promise<UserModel>,
   addPurchasedBackground(id: string, background: string, queryRunner: QueryRunner): Promise<UserModel>,
   purchaseStoreItemWithCoins(id: string, coins: number, queryRunner: QueryRunner): Promise<UserModel>,
-  changeDifficultyLevel(userId: string, level: string): Promise<UserModel>
+  changeDifficultyLevel(userId: string, level: string): Promise<UserModel>,
+  addPoints(id: string, points: number): Promise<UserModel>
 }
 
