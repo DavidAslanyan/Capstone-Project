@@ -11,6 +11,7 @@ export const formatUserOutput = (user: UserModel): CreateUserOutputDto => {
     role: user.getRole(),
     progress: user.getProgress(),
     coins: user.getCoins(),
+    points: user.getPoints(),
     gamesPassed: user.getGamesPassed()
   };
 

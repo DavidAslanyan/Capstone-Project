@@ -16,6 +16,9 @@ export const USER_RESPONSE_MESSAGES = {
 
   user_add_coins_success: "User coins added successfully",
   user_add_coins_fail: "Failed to add coins",
+
+  user_add_points_success: "User points added successfully",
+  user_add_points_fail: "Failed to add points",
   
   user_subtract_coins_success: "User coins subtracted successfully",
   user_subtract_coins_fail: "Failed to subtract coins",

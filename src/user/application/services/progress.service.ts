@@ -161,6 +161,32 @@ export class ProgressService {
     
   }
 
+  async addUserPoints(userId: string, points: number) {
+    try {
+      if (points <= 0) {
+        throw new BadRequestException("Number must be hgiher than zero");
+      }
+  
+      const updatedUser = await this.userRepository.addPoints(userId, points);
+      const updatedUserOutput = formatUserOutput(updatedUser);
+
+      return new CustomResponse(
+        HttpStatus.OK, 
+        updatedUserOutput, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_add_points_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_add_points_fail
+      );
+    }
+    
+  }
+
   async subtractUserCoins(userId: string, coins: number) {
     try {
       if (coins <= 0) {
