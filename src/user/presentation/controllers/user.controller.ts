@@ -17,6 +17,11 @@ export class UserController {
     private readonly userService: UserService,
   ) {}
 
+  @Get('list')
+  async getUsersList() {
+    return this.userService.getUsersList();
+  }
+  
   @Get('/:id')
   async getUser(@Param('id') userId: string) {
     return this.userService.getUser(userId);
