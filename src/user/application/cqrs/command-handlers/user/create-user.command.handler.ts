@@ -46,7 +46,8 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
         this.initialBackground,
         [command.createUserInputDto.avatarUrl],
         [this.initialFrame],
-        [this.initialBackground]
+        [this.initialBackground],
+        null,
       ); 
       
       const email = command.createUserInputDto.email;

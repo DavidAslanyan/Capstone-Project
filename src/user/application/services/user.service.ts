@@ -30,62 +30,6 @@ export class UserService {
     private readonly tokenService: TokenService
   ) {}
 
-  async register(createUserDto: CreateUserDto) {
-    try {
-      const userCommand = new CreateUserCommand(createUserDto);
-      const user: UserModel = await this.commandBus.execute(userCommand);
-      const userOutput = formatUserOutput(user);
-  
-      return new CustomResponse(
-        HttpStatus.CREATED, 
-        userOutput, 
-        null, 
-        USER_RESPONSE_MESSAGES.user_create_success
-      );
-    } catch(error) {
-      return new CustomResponse(
-        error.status, 
-        null, 
-        error.message, 
-        USER_RESPONSE_MESSAGES.user_create_fail
-      );
-    }
-    
-  }
-
-  async login(loginUserDto: LoginUserDto) {
-    try {
-      const userCommand = new LoginUserCommand(loginUserDto);
-      const user: UserModel = await this.commandBus.execute(userCommand);
-
-      const userEmail = user.getEmail();
-      const userId = user.getId();
-      const payload = { email: userEmail, sub: userId };
-
-      const accessToken = await this.tokenService.generateAccessToken(payload);
-      const refreshToken = await this.tokenService.generateRefreshToken(payload);
-      
-      const userOutput = {
-        user: formatUserOutput(user),
-        accessToken,
-        refreshToken
-      };
-  
-      return new CustomResponse(
-        HttpStatus.ACCEPTED, 
-        userOutput, 
-        null, 
-        USER_RESPONSE_MESSAGES.user_login_success
-      );
-    } catch(error) {
-      return new CustomResponse(
-        error.status, 
-        null, 
-        error.message, 
-        USER_RESPONSE_MESSAGES.user_login_fail
-      );
-    }
-  }
 
   async getUser(userId: string) {
     try {

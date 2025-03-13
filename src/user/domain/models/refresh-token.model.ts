@@ -2,7 +2,6 @@ import { CoreModel } from 'src/core/infrastructure/models/core.model';
 import { UserModel } from './user.model';
 
 export class RefreshTokenModel extends CoreModel {
-  private user: UserModel;
   private token: string;
   private expiresAt: Date;
   private isActive: boolean;
@@ -17,15 +16,11 @@ export class RefreshTokenModel extends CoreModel {
     updatedAt?: Date,
   ) {
     super(id, createdAt, updatedAt);
-    this.user = user;
     this.token = token;
     this.expiresAt = expiresAt;
     this.isActive = isActive;
   }
 
-  public getUser(): UserModel {
-    return this.user;
-  }
 
   public getToken(): string {
     return this.token;

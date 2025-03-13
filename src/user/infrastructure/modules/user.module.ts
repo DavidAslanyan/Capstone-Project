@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, RequestMethod } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CqrsModule } from '@nestjs/cqrs';
 import { UserService } from "src/user/application/services/user.service";
@@ -24,6 +24,11 @@ import { DeleteUserCommandHandler } from "src/user/application/cqrs/command-hand
 import { ProgressService } from "src/user/application/services/progress.service";
 import { ProgressController } from "src/user/presentation/controllers/progress.controller";
 import { AddStoreItemCommandHandler } from "src/user/application/cqrs/command-handlers/progress/add-store-item.command-handler";
+import { PassportModule } from "@nestjs/passport";
+import { LocalStrategy } from "src/user/presentation/strategies/local.strategy";
+import { AuthController } from "src/user/presentation/controllers/auth.controller";
+import { AuthService } from "src/user/application/services/auth.service";
+import { AuthMiddleware } from "src/user/presentation/middlewares/auth.middleware";
 
 config({ path: '.env' });
 
@@ -37,6 +42,7 @@ config({ path: '.env' });
       PermissionEntity
     ]),
     CqrsModule,
+    PassportModule, 
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -46,8 +52,9 @@ config({ path: '.env' });
       }),
     }),
   ],
-  controllers: [UserController, ProgressController],
+  controllers: [AuthController, UserController, ProgressController],
   providers: [
+    AuthService,
     UserService,
     ProgressService,
     PasswordService,
@@ -58,7 +65,7 @@ config({ path: '.env' });
     UpdateUserCommandHandler,
     DeleteUserCommandHandler,
     AddStoreItemCommandHandler,
-
+    LocalStrategy,
     GetUserByIdHandler,
     {
       provide: 'IUserRepository',
@@ -67,5 +74,15 @@ config({ path: '.env' });
   ],
   exports: [TypeOrmModule, JwtModule],
 })
-export class UserModule {}
+export class UserModule {
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer
+  //     .apply(AuthMiddleware)
+  //     .exclude(
+  //       { path: 'auth/login', method: RequestMethod.POST },
+  //       { path: 'auth/register', method: RequestMethod.POST },
+  //     )
+  //     .forRoutes('*');
+  // }
+}
 

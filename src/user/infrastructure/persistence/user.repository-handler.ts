@@ -281,6 +281,21 @@ export class UserRepositoryHandler implements IUserRepository {
     return UserMapper.toModel(updatedUser);
   }
   
+
+  async saveRefreshToken(userId: string, token: string): Promise<string> {
+    const user = await this.repository.findOne({
+      where: { id: userId }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.refresh_token = token;
+    const updatedUser = await this.repository.save(user);
+
+    return updatedUser.refresh_token;
+  }
   
 
 }

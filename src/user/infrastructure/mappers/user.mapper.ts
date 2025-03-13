@@ -23,6 +23,7 @@ export class UserMapper {
       entity.avatars_purchased,
       entity.frames_purchased,
       entity.backgrounds_purchased,
+      entity.refresh_token,
       entity.id,
       entity.created_at,
       entity.updated_at,
@@ -49,6 +50,7 @@ export class UserMapper {
     entity.avatars_purchased = model.getAvatarsPurchased();
     entity.frames_purchased = model.getFramesPurchased();
     entity.backgrounds_purchased = model.getBackgroundsPurchased();
+    entity.refresh_token = model.getRefreshToken();
     entity.created_at = model.getCreatedAt();
     entity.updated_at = model.getUpdatedAt();
 
