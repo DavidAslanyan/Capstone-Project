@@ -79,4 +79,24 @@ export class AuthService {
       );
     }
   }
+
+  async logout(userId: string) {
+    try {
+      await this.userRepository.logout(userId);
+
+      return new CustomResponse(
+        HttpStatus.ACCEPTED, 
+        null, 
+        null, 
+        USER_RESPONSE_MESSAGES.user_logout_success
+      );
+    } catch(error) {
+      return new CustomResponse(
+        error.status, 
+        null, 
+        error.message, 
+        USER_RESPONSE_MESSAGES.user_logout_fail
+      );
+    }
+  }
 }

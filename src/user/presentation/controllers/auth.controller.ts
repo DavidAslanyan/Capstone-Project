@@ -3,13 +3,11 @@ import { ApiCreateUser } from "src/swagger/user/user.swagger";
 import { CreateUserDto } from "src/user/application/dtos/input/create-user.dto";
 import { AuthService } from "src/user/application/services/auth.service";
 import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
-import { LocalGuard } from "../guards/local.guard";
 import { LoginUserDto } from "src/user/application/dtos/input/login-user.dto";
-import {
-  Res
-} from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Res } from '@nestjs/common';
+import { Response } from 'express';
 import { JwtAuthGuard } from "../guards/jwt.guard";
+import { Request } from "express";
 
 @Controller(`${BASE_ROUTE}/auth`)
 export class AuthController {
@@ -31,9 +29,13 @@ export class AuthController {
     return await this.authService.login(loginUserDto);
   }
 
-  @Get()
+  @Post("/logout")
   @UseGuards(JwtAuthGuard)
-  getProfile(@Req() req) {
-    return { message: 'Profile data', user: req.user };
+  async logout(@Req() req: Request) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
+    return this.authService.logout(userId);
   }
+
+  
 }

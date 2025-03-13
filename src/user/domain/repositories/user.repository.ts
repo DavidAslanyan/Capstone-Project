@@ -23,6 +23,7 @@ export interface IUserRepository {
   changeDifficultyLevel(userId: string, level: string): Promise<UserModel>,
   addPoints(id: string, points: number): Promise<UserModel>,
   getUsersList(): Promise<UserModel[]>,
-  saveRefreshToken(userId: string, token: string): Promise<string>
+  saveRefreshToken(userId: string, token: string): Promise<string>,
+  logout(userId: string)
 }
 
