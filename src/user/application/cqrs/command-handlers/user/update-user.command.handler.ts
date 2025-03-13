@@ -56,7 +56,8 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
       command.updateUserDto.backgroundUrl,
       [],
       [],
-      []
+      [],
+      existingUser.getRefreshToken()
     );
 
     const updatedUser = await this.userRepository.updateUser(userId, userModel);

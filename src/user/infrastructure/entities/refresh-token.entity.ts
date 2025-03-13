@@ -50,8 +50,4 @@ export class RefreshTokenEntity {
   })
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updated_at: Date;
-
-  @ManyToOne(() => UserEntity, (user) => user.refresh_tokens)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
 }

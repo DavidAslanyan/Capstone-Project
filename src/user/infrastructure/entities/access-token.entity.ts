@@ -49,8 +49,4 @@ export class AccessTokenEntity {
   })
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updated_at: Date;
-
-  @ManyToOne(() => UserEntity, (user) => user.access_tokens)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
 }

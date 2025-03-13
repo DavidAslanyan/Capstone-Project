@@ -1,17 +1,17 @@
-import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Patch, Post, Put, Res, UseFilters, UseInterceptors } from "@nestjs/common";
-import { ApiCreateUser, ApiUserTags } from "src/swagger/user/user.swagger";
+import { Body, Controller, Delete, Get, Param, Patch, Req, UseFilters, UseGuards } from "@nestjs/common";
+import { ApiUserTags } from "src/swagger/user/user.swagger";
 import { ChangeDifficultyLevelDto } from "src/user/application/dtos/input/change-difficulty-level.dto";
-import { CreateUserDto } from "src/user/application/dtos/input/create-user.dto";
-import { LoginUserDto } from "src/user/application/dtos/input/login-user.dto";
 import { UpdateUserDto } from "src/user/application/dtos/input/update-user.dto";
 import { HttpExceptionFilter } from "src/user/application/exception-filter/http.exception-filter";
 import { UserService } from "src/user/application/services/user.service";
 import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
+import { JwtAuthGuard } from "../guards/jwt.guard";
+import { Request } from "express";
 
 
 @ApiUserTags
 @UseFilters(HttpExceptionFilter)
-@Controller(`${BASE_ROUTE}/auth`)
+@Controller(`${BASE_ROUTE}/user`)
 export class UserController {
   constructor(
     private readonly userService: UserService,
@@ -23,25 +23,13 @@ export class UserController {
   }
   
   @Get('/:id')
+  @UseGuards(JwtAuthGuard)
   async getUser(@Param('id') userId: string) {
     return this.userService.getUser(userId);
   }
 
-  @Post('/register')
-  @ApiCreateUser()
-  @UseInterceptors(ClassSerializerInterceptor)
-  async register(@Body() createUserDto: CreateUserDto) {
-    return this.userService.register(createUserDto);
-  }
-
-  @Post('/login')
-  @ApiCreateUser()
-  @UseInterceptors(ClassSerializerInterceptor)
-  async login(@Body() loginUserDto: LoginUserDto) {
-    return this.userService.login(loginUserDto);
-  }
-
   @Patch('/update/:userId')
+  @UseGuards(JwtAuthGuard)
   async update(
     @Param('userId') userId: string,
     @Body() updateUserDto: UpdateUserDto
@@ -50,12 +38,18 @@ export class UserController {
   }
 
   @Patch('/change-difficulty')
-  async changeDifficultyLevel(@Body() difficultyLevelDto: ChangeDifficultyLevelDto) {
-    const userId = "b0f7c193-9e89-44eb-9891-aeec0b384159";
+  @UseGuards(JwtAuthGuard)
+  async changeDifficultyLevel(
+    @Body() difficultyLevelDto: ChangeDifficultyLevelDto,
+    @Req() req: Request
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.userService.changeDiffcultyLevel(userId, difficultyLevelDto);
   }
 
   @Delete('/:userId')
+  @UseGuards(JwtAuthGuard)
   async delete(@Param('userId') userId: string) {
     return this.userService.deleteUser(userId);
   }

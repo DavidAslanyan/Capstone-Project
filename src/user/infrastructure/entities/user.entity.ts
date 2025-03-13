@@ -135,6 +135,15 @@ export class UserEntity {
   backgrounds_purchased: string[];
 
   @ApiProperty({
+    description: 'Refresh Token'
+  })
+  @Column({
+    type: 'text', 
+    nullable: true
+  })
+  refresh_token: string;
+
+  @ApiProperty({
     description: 'Timestamp when the record was created',
     default: () => 'CURRENT_TIMESTAMP',
     example: '2025-01-19T12:34:56Z',
@@ -149,11 +158,5 @@ export class UserEntity {
   })
   @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updated_at: Date;
-
-  @OneToMany(() => AccessTokenEntity, (accessToken) => accessToken.user)
-  access_tokens: AccessTokenEntity[];
-
-  @OneToMany(() => RefreshTokenEntity, (refreshToken) => refreshToken.user)
-  refresh_tokens: RefreshTokenEntity[];
 }
 

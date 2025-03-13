@@ -22,6 +22,7 @@ export class UserModel extends CoreModel {
   private avatarsPurchased: string[];
   private framesPurchased: string[];
   private backgroundsPurchased: string[];
+  private refreshToken: string;
 
   constructor(
     firstName: string,
@@ -41,6 +42,7 @@ export class UserModel extends CoreModel {
     avatarsPurchased: string[],
     framesPurchased: string[],
     backgroundsPurchased: string[],
+    refreshToken: string,
     id?: string,
     createdAt?: Date,
     updatedAt?: Date,
@@ -63,6 +65,7 @@ export class UserModel extends CoreModel {
     this.avatarsPurchased = avatarsPurchased;
     this.framesPurchased = framesPurchased;
     this.backgroundsPurchased = backgroundsPurchased;
+    this.refreshToken = refreshToken;
   }
 
   public getFirstName(): string {
@@ -133,6 +136,10 @@ export class UserModel extends CoreModel {
     return this.backgroundsPurchased;
   }
 
+  public getRefreshToken(): string {
+    return this.refreshToken;
+  }
+
   public setFirstName(firstName: string): void {
     this.firstName = firstName;
   }
@@ -199,6 +206,10 @@ export class UserModel extends CoreModel {
 
   public setBackgroundsPurchased(backgrounds: string[]): void {
     this.backgroundsPurchased = backgrounds;
+  }
+
+  public setRefreshToken(token: string): void {
+    this.refreshToken = token;
   }
 
 }

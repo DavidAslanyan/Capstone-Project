@@ -22,6 +22,7 @@ export interface IUserRepository {
   purchaseStoreItemWithCoins(id: string, coins: number, queryRunner: QueryRunner): Promise<UserModel>,
   changeDifficultyLevel(userId: string, level: string): Promise<UserModel>,
   addPoints(id: string, points: number): Promise<UserModel>,
-  getUsersList(): Promise<UserModel[]>
+  getUsersList(): Promise<UserModel[]>,
+  saveRefreshToken(userId: string, token: string): Promise<string>
 }
 
