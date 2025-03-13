@@ -296,6 +296,19 @@ export class UserRepositoryHandler implements IUserRepository {
 
     return updatedUser.refresh_token;
   }
+
+  async logout(userId: string) {
+    const user = await this.repository.findOne({
+      where: { id: userId }
+    });
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    user.status = UserStatusEnum.INACTIVE;
+    await this.repository.save(user);
+  }
   
 
 }

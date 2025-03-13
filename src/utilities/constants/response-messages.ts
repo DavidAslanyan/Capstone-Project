@@ -5,6 +5,9 @@ export const USER_RESPONSE_MESSAGES = {
   user_login_success: "User logged in successfully",
   user_login_fail: "Failed to login user",
 
+  user_logout_success: "User logged out successfully",
+  user_logout_fail: "Failed to logout user",
+
   user_get_success: "User retreived successfully",
   user_get_fail: "Failed to retrieve user",
 
