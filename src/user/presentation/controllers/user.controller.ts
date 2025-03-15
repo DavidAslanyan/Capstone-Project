@@ -22,9 +22,11 @@ export class UserController {
     return this.userService.getUsersList();
   }
   
-  @Get('/:id')
+  @Get()
   @UseGuards(JwtAuthGuard)
-  async getUser(@Param('id') userId: string) {
+  async getUser(@Req() req: Request) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.userService.getUser(userId);
   }
 

@@ -8,6 +8,7 @@ import { Res } from '@nestjs/common';
 import { Response } from 'express';
 import { JwtAuthGuard } from "../guards/jwt.guard";
 import { Request } from "express";
+import { GoogleLoginDto } from "src/user/application/dtos/input/google-login.dto";
 
 @Controller(`${BASE_ROUTE}/auth`)
 export class AuthController {
@@ -35,6 +36,11 @@ export class AuthController {
     const user = req.user as { sub: string };
     const userId = user.sub;
     return this.authService.logout(userId);
+  }
+
+  @Post("google")
+  async googleLogin(@Body() googleLoginDto:  GoogleLoginDto) {
+    return this.authService.googleLogin(googleLoginDto);
   }
 
   

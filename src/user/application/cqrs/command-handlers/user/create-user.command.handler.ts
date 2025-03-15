@@ -18,7 +18,8 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
   private readonly initialCoins = 0;
   private readonly initialPoints = 0;
   private readonly initialFrame = "def";
-  private readonly initialBackground = "def"
+  private readonly initialBackground = "def";
+  private readonly initilaUsersAvatars = ["/user-avatars/male-1.png", "/user-avatars/female-1.png"];
 
   constructor(
     @Inject('IUserRepository')
@@ -44,7 +45,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
         command.createUserInputDto.avatarUrl,
         this.initialFrame,
         this.initialBackground,
-        [command.createUserInputDto.avatarUrl],
+        this.initilaUsersAvatars,
         [this.initialFrame],
         [this.initialBackground],
         null,
