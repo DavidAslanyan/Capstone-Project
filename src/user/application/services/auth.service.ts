@@ -10,6 +10,8 @@ import { CustomResponse } from "../responses/custom-response.dto";
 import { USER_RESPONSE_MESSAGES } from "src/utilities/constants/response-messages";
 import { LoginUserDto } from "../dtos/input/login-user.dto";
 import { LoginUserCommand } from "../cqrs/commands/user/login-user.command";
+import { jwtDecode } from "jwt-decode";
+import { GoogleLoginDto } from "../dtos/input/google-login.dto";
 
 @Injectable()
 export class AuthService {
@@ -98,5 +100,13 @@ export class AuthService {
         USER_RESPONSE_MESSAGES.user_logout_fail
       );
     }
+  }
+
+
+  async googleLogin(googleLoginDto:  GoogleLoginDto) {
+    const decoded = jwtDecode(googleLoginDto.credential);
+    const userId = googleLoginDto.clientId;
+    console.log(decoded)
+    console.log(userId)
   }
 }
