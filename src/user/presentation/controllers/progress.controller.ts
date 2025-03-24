@@ -1,4 +1,4 @@
-import { Body, Controller, Patch, Post, Put, UseFilters } from "@nestjs/common";
+import { Body, Controller, Patch, Post, Put, Req, UseFilters, UseGuards } from "@nestjs/common";
 import { ApiUpdateUserProgress } from "src/swagger/user/user.swagger";
 import { PurchaseStoreItemDto } from "src/user/application/dtos/input/purchase-store-item.dto";
 import { AddUserCoinsDto } from "src/user/application/dtos/input/add-user-coins.dto";
@@ -8,6 +8,8 @@ import { HttpExceptionFilter } from "src/user/application/exception-filter/http.
 import { ProgressService } from "src/user/application/services/progress.service";
 import { BASE_ROUTE } from "src/utilities/constants/urls.constant";
 import { AddUserPointsDto } from "src/user/application/dtos/input/add-user-ponts.dto";
+import { JwtAuthGuard } from "../guards/jwt.guard";
+import { Request } from "express";
 
 
 @UseFilters(HttpExceptionFilter)
@@ -57,8 +59,13 @@ export class ProgressController {
   }
 
   @Post('purchase')
-  async purchaseStoreItem(@Body() purchaseStoreItemDto: PurchaseStoreItemDto) {
-    const userId = this.id;
+  @UseGuards(JwtAuthGuard)
+  async purchaseStoreItem(
+    @Req() req: Request,
+    @Body() purchaseStoreItemDto: PurchaseStoreItemDto
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.purchaseStoreItem(userId, purchaseStoreItemDto)
   }
 

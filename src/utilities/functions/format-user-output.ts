@@ -16,6 +16,9 @@ export const formatUserOutput = (user: UserModel): CreateUserOutputDto => {
     coins: user.getCoins(),
     points: user.getPoints(),
     gamesPassed: user.getGamesPassed(),
+    ownedAvatars: user.getAvatarsPurchased(),
+    ownedFrames: user.getFramesPurchased(),
+    ownedBackgrounds: user.getBackgroundsPurchased()
   };
 
   return userOutput;
