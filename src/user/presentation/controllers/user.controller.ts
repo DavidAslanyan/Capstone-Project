@@ -30,12 +30,14 @@ export class UserController {
     return this.userService.getUser(userId);
   }
 
-  @Patch('/update/:userId')
+  @Patch('/update')
   @UseGuards(JwtAuthGuard)
   async update(
-    @Param('userId') userId: string,
+    @Req() req: Request,
     @Body() updateUserDto: UpdateUserDto
   ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.userService.updateUser(updateUserDto, userId);
   }
 
