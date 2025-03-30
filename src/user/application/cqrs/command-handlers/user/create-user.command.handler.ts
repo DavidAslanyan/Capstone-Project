@@ -18,7 +18,7 @@ export class CreateUserCommandHandler implements ICommandHandler<CreateUserComma
   private readonly initialCoins = 0;
   private readonly initialPoints = 0;
   private readonly initialFrame = "def";
-  private readonly initialBackground = "def";
+  private readonly initialBackground = "/backgrounds/cover-1.jpg";
   private readonly initilaUsersAvatars = ["/user-avatars/male-1.png", "/user-avatars/female-1.png"];
 
   constructor(

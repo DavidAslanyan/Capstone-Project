@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, Req, UseGuards, UseInterceptors } from "@nestjs/common";
+import { Body, ClassSerializerInterceptor, Controller, Post, Req, UseGuards, UseInterceptors } from "@nestjs/common";
 import { ApiCreateUser } from "src/swagger/user/user.swagger";
 import { CreateUserDto } from "src/user/application/dtos/input/create-user.dto";
 import { AuthService } from "src/user/application/services/auth.service";
