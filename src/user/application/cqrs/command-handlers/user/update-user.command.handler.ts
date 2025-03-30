@@ -8,6 +8,7 @@ import { PasswordService } from "src/user/application/services/password.service"
 import { UpdateUserCommand } from "../../commands/user/update-user.command";
 import { ERROR_MESSAGES } from "src/utilities/constants/response-messages";
 import { DifficultyLevelEnum } from "src/user/domain/enums/difficulty-level.enum";
+import { UserGateway } from "src/user/presentation/gateways/user.gateway";
 
 
 @CommandHandler(UpdateUserCommand)
@@ -18,6 +19,7 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
     private readonly passwordService: PasswordService,
+    private readonly userGateway: UserGateway
   ) {}
   
   async execute(command: UpdateUserCommand): Promise<UserModel> {
@@ -61,6 +63,7 @@ export class UpdateUserCommandHandler implements ICommandHandler<UpdateUserComma
     );
 
     const updatedUser = await this.userRepository.updateUser(userId, userModel);
+    this.userGateway.updateUser(updatedUser);
 
     return updatedUser;
   }

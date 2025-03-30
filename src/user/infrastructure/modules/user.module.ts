@@ -29,6 +29,7 @@ import { LocalStrategy } from "src/user/presentation/strategies/local.strategy";
 import { AuthController } from "src/user/presentation/controllers/auth.controller";
 import { AuthService } from "src/user/application/services/auth.service";
 import { AuthMiddleware } from "src/user/presentation/middlewares/auth.middleware";
+import { UserGateway } from "src/user/presentation/gateways/user.gateway";
 
 config({ path: '.env' });
 
@@ -54,6 +55,7 @@ config({ path: '.env' });
   ],
   controllers: [AuthController, UserController, ProgressController],
   providers: [
+    UserGateway,
     AuthService,
     UserService,
     ProgressService,
