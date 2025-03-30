@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Req, UseFilters, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Patch, Req, UseFilters, UseGuards } from "@nestjs/common";
 import { ApiUserTags } from "src/swagger/user/user.swagger";
 import { ChangeDifficultyLevelDto } from "src/user/application/dtos/input/change-difficulty-level.dto";
 import { UpdateUserDto } from "src/user/application/dtos/input/update-user.dto";
@@ -52,9 +52,11 @@ export class UserController {
     return this.userService.changeDiffcultyLevel(userId, difficultyLevelDto);
   }
 
-  @Delete('/:userId')
+  @Delete()
   @UseGuards(JwtAuthGuard)
-  async delete(@Param('userId') userId: string) {
+  async delete(@Req() req: Request) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.userService.deleteUser(userId);
   }
 
