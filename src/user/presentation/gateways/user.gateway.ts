@@ -6,9 +6,17 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
+import { Server } from 'socket.io';
 
-@WebSocketGateway({ cors: true }) 
+@WebSocketGateway({ 
+  cors: {
+    origin: 'http://localhost:3001', 
+    methods: ['GET', 'POST'],
+  },
+ }) 
 export class UserGateway implements OnGatewayConnection, OnGatewayDisconnect {
+  @WebSocketServer()
+  server: Server;
 
   private clients = new Set<string>();
 
@@ -23,7 +31,7 @@ export class UserGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   updateUser(user: any) {
-    
+    this.server.emit('update-user', user);
   }
 
   @SubscribeMessage('requestUserUpdate')
