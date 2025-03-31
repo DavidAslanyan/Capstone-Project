@@ -21,40 +21,67 @@ export class ProgressController {
   ) {}
 
   @Patch()
+  @UseGuards(JwtAuthGuard)
   @ApiUpdateUserProgress()
-  async updateProgress(@Body() updateUserProgress: UpdateUserProgressDto) {
-    const userId = this.id;
+  async updateProgress(
+    @Req() req: Request,
+    @Body() updateUserProgress: UpdateUserProgressDto
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.updateUserProgress(updateUserProgress, userId);
   }
 
   @Patch('add')
+  @UseGuards(JwtAuthGuard)
   @ApiUpdateUserProgress()
-  async addProgress(@Body() updateUserProgress: UpdateUserProgressDto) {
-    const userId = this.id;
+  async addProgress(
+    @Req() req: Request,
+    @Body() updateUserProgress: UpdateUserProgressDto
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.addProgress(userId, updateUserProgress);
   }
 
   @Post('game')
-  async updateGamesPassed(@Body() addGamePassedDto: AddGamePassedDto ) {
-    const userId = this.id;
+  @UseGuards(JwtAuthGuard)
+  async updateGamesPassed(
+    @Req() req: Request,
+    @Body() addGamePassedDto: AddGamePassedDto
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.addGamePassed(userId, addGamePassedDto.gamePassed);
   }
 
   @Put('games/clear')
-  async clearPassedGames() {
-    const userId = this.id;
+  @UseGuards(JwtAuthGuard)
+  async clearPassedGames(@Req() req: Request) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.clearPassedGames(userId);
   }
 
   @Patch('add-coins')
-  async addUserCoins(@Body() addUserCoinsDto: AddUserCoinsDto ) {
-    const userId = this.id;
+  @UseGuards(JwtAuthGuard)
+  async addUserCoins(
+    @Req() req: Request,
+    @Body() addUserCoinsDto: AddUserCoinsDto
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.addUserCoins(userId, addUserCoinsDto.coins);
   }
 
   @Patch('subtract-coins')
-  async subtractUserCoins(@Body() subtractUserCoinsDto: AddUserCoinsDto ) {
-    const userId = this.id;
+  @UseGuards(JwtAuthGuard)
+  async subtractUserCoins(
+    @Req() req: Request,
+    @Body() subtractUserCoinsDto: AddUserCoinsDto
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.subtractUserCoins(userId, subtractUserCoinsDto.coins);
   }
 
@@ -70,8 +97,13 @@ export class ProgressController {
   }
 
   @Patch('add-points')
-  async addUserPoints(@Body() addUserPointsDto: AddUserPointsDto ) {
-    const userId = this.id;
+  @UseGuards(JwtAuthGuard)
+  async addUserPoints(
+    @Req() req: Request,
+    @Body() addUserPointsDto: AddUserPointsDto
+  ) {
+    const user = req.user as { sub: string };
+    const userId = user.sub;
     return this.progressService.addUserPoints(userId, addUserPointsDto.points);
   }
 
