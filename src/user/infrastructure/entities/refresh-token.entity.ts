@@ -2,12 +2,9 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-  JoinColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('refresh_token')

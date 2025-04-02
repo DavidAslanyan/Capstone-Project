@@ -10,6 +10,7 @@ import { JwtAuthGuard } from "../guards/jwt.guard";
 import { Request } from "express";
 import { GoogleLoginDto } from "src/user/application/dtos/input/google-login.dto";
 
+
 @Controller(`${BASE_ROUTE}/auth`)
 export class AuthController {
   constructor(
