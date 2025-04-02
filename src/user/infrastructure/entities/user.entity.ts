@@ -2,9 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { DifficultyLevelEnum } from "../../domain/enums/difficulty-level.enum";
 import { UserRoleEnum } from "../../domain/enums/user-role.enum";
 import { UserStatusEnum } from "../../domain/enums/user-status.enum";
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { AccessTokenEntity } from "./access-token.entity";
-import { RefreshTokenEntity } from "./refresh-token.entity";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Exclude } from "class-transformer";
 
 @Entity('user')
