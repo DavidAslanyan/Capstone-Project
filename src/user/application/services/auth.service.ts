@@ -106,7 +106,5 @@ export class AuthService {
   async googleLogin(googleLoginDto:  GoogleLoginDto) {
     const decoded = jwtDecode(googleLoginDto.credential);
     const userId = googleLoginDto.clientId;
-    console.log(decoded)
-    console.log(userId)
   }
 }

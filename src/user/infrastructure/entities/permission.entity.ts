@@ -2,6 +2,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { RoleEntity } from "./role.entity";
 
+
+
 @Entity('role')
 export class PermissionEntity {
   @ApiProperty({
