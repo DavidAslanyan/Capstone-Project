@@ -3,6 +3,8 @@ import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGenerat
 import { PermissionEntity } from "./permission.entity";
 import { UserRoleEnum } from "../../domain/enums/user-role.enum";
 
+
+
 @Entity('role')
 export class RoleEntity {
   @ApiProperty({
