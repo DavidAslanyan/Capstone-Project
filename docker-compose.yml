@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  solaris-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always  
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT}:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
+    networks:
+      - myapp-network  
+    
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5436:5432"
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - myapp-network  
+
+networks:
+  myapp-network:
+    driver: bridge
+
+volumes:
+  db_data:
