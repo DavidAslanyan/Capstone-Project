@@ -4,7 +4,7 @@
 
 Welcome to the backend of **ITalk** — an educational platform designed to teach IT and tech terms in a fun, interactive, and accessible way.
 
-## 📚 About ITalk
+## About ITalk
 
 In today's tech-driven world, miscommunication often stems from a lack of understanding of technical terms. Even the best engineers once had to learn these concepts from scratch. **Education is the solution.**
 
@@ -22,21 +22,21 @@ Covering topics from **beginner** to **advanced** levels.
 
 Whether you're just starting your tech journey or looking to sharpen your skills, **ITalk** is your go-to educational companion.
 
-## ✨ Features
+## Features
 
-### 📘 Structured Learning Paths  
+### Structured Learning Paths  
 Organized courses based on difficulty level, from **beginner** to **expert**.
 
-### 🧠 Interactive Lessons and Quizzes  
+### Interactive Lessons and Quizzes  
 Engage with material through short, dynamic lessons and quick quizzes to reinforce learning.
 
-### 📊 Progress Tracking  
+### Progress Tracking  
 Monitor your achievements and learning streaks as you master new terms and concepts.
 
-### 🎮 Gamified Experience  
+### Gamified Experience  
 Earn points, unlock levels, and stay motivated through fun, game-like mechanics.
 
-### 🌐 Cross-Platform Access  
+### Cross-Platform Access  
 Learn seamlessly on web or mobile — your progress syncs across devices.
 
 ## Backend Overview
@@ -84,7 +84,7 @@ Create a .env file following the structure of .env.example.
 npm run start:dev
 ```
 
-## 🚀 Deployment
+## Deployment
 
 **ITalk Backend** can be deployed on cloud providers like **AWS**, **DigitalOcean**, or platforms like **Heroku**, **Railway**, etc.
 
@@ -92,7 +92,7 @@ npm run start:dev
 
 ---
 
-## 🐳 Docker Setup
+## Docker Setup
 
 You can easily run the ITalk Backend using Docker.
 
@@ -107,7 +107,7 @@ docker run -p 3000:3000 --env-file .env italk-backend
 
 This will start the server at http://localhost:3000
 
-## 🐳 Docker Setup with `docker-compose`
+## Docker Setup with `docker-compose`
 
 The following `docker-compose.yml` file is used to set up the **ITalk Backend** along with **PostgreSQL**. This setup creates two services: `solaris-api` (the backend) and `postgres` (the database), running in a **bridge network**.
 
@@ -157,3 +157,12 @@ networks:
 volumes:
   # Persistent volume for PostgreSQL data
   db_data:
+```
+## 🤝 Contributing
+
+Official Deployment Coming soon!  
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
