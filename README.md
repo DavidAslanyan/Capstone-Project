@@ -4,7 +4,7 @@
 
 Welcome to the backend of **ITalk** — an educational platform designed to teach IT and tech terms in a fun, interactive, and accessible way.
 
-## 📚 About ITalk
+## About ITalk
 
 In today's tech-driven world, miscommunication often stems from a lack of understanding of technical terms. Even the best engineers once had to learn these concepts from scratch. **Education is the solution.**
 
@@ -22,21 +22,21 @@ Covering topics from **beginner** to **advanced** levels.
 
 Whether you're just starting your tech journey or looking to sharpen your skills, **ITalk** is your go-to educational companion.
 
-## ✨ Features
+## Features
 
-### 📘 Structured Learning Paths  
+### Structured Learning Paths  
 Organized courses based on difficulty level, from **beginner** to **expert**.
 
-### 🧠 Interactive Lessons and Quizzes  
+### Interactive Lessons and Quizzes  
 Engage with material through short, dynamic lessons and quick quizzes to reinforce learning.
 
-### 📊 Progress Tracking  
+### Progress Tracking  
 Monitor your achievements and learning streaks as you master new terms and concepts.
 
-### 🎮 Gamified Experience  
+### Gamified Experience  
 Earn points, unlock levels, and stay motivated through fun, game-like mechanics.
 
-### 🌐 Cross-Platform Access  
+### Cross-Platform Access  
 Learn seamlessly on web or mobile — your progress syncs across devices.
 
 ## Backend Overview
