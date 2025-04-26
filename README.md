@@ -84,7 +84,7 @@ Create a .env file following the structure of .env.example.
 npm run start:dev
 ```
 
-## 🚀 Deployment
+## Deployment
 
 **ITalk Backend** can be deployed on cloud providers like **AWS**, **DigitalOcean**, or platforms like **Heroku**, **Railway**, etc.
 
@@ -92,7 +92,7 @@ npm run start:dev
 
 ---
 
-## 🐳 Docker Setup
+## Docker Setup
 
 You can easily run the ITalk Backend using Docker.
 
@@ -107,7 +107,7 @@ docker run -p 3000:3000 --env-file .env italk-backend
 
 This will start the server at http://localhost:3000
 
-## 🐳 Docker Setup with `docker-compose`
+## Docker Setup with `docker-compose`
 
 The following `docker-compose.yml` file is used to set up the **ITalk Backend** along with **PostgreSQL**. This setup creates two services: `solaris-api` (the backend) and `postgres` (the database), running in a **bridge network**.
 
@@ -157,3 +157,12 @@ networks:
 volumes:
   # Persistent volume for PostgreSQL data
   db_data:
+```
+## 🤝 Contributing
+
+Official Deployment Coming soon!  
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
