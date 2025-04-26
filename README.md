@@ -1,73 +1,168 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+![ITalk Logo](/src/assets/logo.png)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# ITalk Backend
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Welcome to the backend of **ITalk** — an educational platform designed to teach IT and tech terms in a fun, interactive, and accessible way.
 
-## Description
+## About ITalk
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
- 
-## Installation
- 
+In today's tech-driven world, miscommunication often stems from a lack of understanding of technical terms. Even the best engineers once had to learn these concepts from scratch. **Education is the solution.**
+
+**ITalk** was born from a simple idea:
+
+> If we have apps like Duolingo to teach languages, why not have a platform dedicated to teaching IT terms?
+
+**ITalk** aims to make technical learning approachable by offering:
+
+- Structured lessons
+- Quizzes
+- Interactive exercises
+
+Covering topics from **beginner** to **advanced** levels.
+
+Whether you're just starting your tech journey or looking to sharpen your skills, **ITalk** is your go-to educational companion.
+
+## Features
+
+### Structured Learning Paths  
+Organized courses based on difficulty level, from **beginner** to **expert**.
+
+### Interactive Lessons and Quizzes  
+Engage with material through short, dynamic lessons and quick quizzes to reinforce learning.
+
+### Progress Tracking  
+Monitor your achievements and learning streaks as you master new terms and concepts.
+
+### Gamified Experience  
+Earn points, unlock levels, and stay motivated through fun, game-like mechanics.
+
+### Cross-Platform Access  
+Learn seamlessly on web or mobile — your progress syncs across devices.
+
+## Backend Overview
+
+This repository contains the backend services that power the **ITalk** platform.
+
+### Tech Stack
+
+- **Node.js / NestJS** – Backend framework  
+- **PostgreSQL** – Relational database  
+- **TypeORM / Prisma** – Object-Relational Mapping (ORM)  
+- **Redis** *(if applicable)* – Caching and session management  
+- **JWT Authentication** – Secure user login  
+- **REST API & WebSocket Support** – Real-time features and structured endpoints
+
+### Core Modules
+
+- **Authentication**: Secure user login and registration  
+- **Course Management**: Admin and user endpoints for creating and accessing courses and lessons  
+- **Progress Tracking**: APIs for managing user progress and achievements  
+- **Gamification Module**: Points, badges, and ranking systems  
+- **Admin Panel APIs**: Tools for admins to manage content and users
+
+## Run Locally
+
+1. **Clone the repository:**
+
 ```bash
-$ npm install
+git clone https://github.com/your-username/italk-backend.git
+cd italk-backend
 ```
 
-## Running the app
+2. **Install dependencies:**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Test
+3. **Set up environment variables**
+Create a .env file following the structure of .env.example.
+
+4. **Run the development server:**
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Support
+## Deployment
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**ITalk Backend** can be deployed on cloud providers like **AWS**, **DigitalOcean**, or platforms like **Heroku**, **Railway**, etc.
 
-## Stay in touch
+📦 **Docker support** is available for containerized deployment.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## Docker Setup
 
-Nest is [MIT licensed](LICENSE).
+You can easily run the ITalk Backend using Docker.
+
+### 1. Build and Run with Docker
+
+Make sure you have Docker installed, then run:
+
+```bash
+docker build -t italk-backend .
+docker run -p 3000:3000 --env-file .env italk-backend
+```
+
+This will start the server at http://localhost:3000
+
+## Docker Setup with `docker-compose`
+
+The following `docker-compose.yml` file is used to set up the **ITalk Backend** along with **PostgreSQL**. This setup creates two services: `solaris-api` (the backend) and `postgres` (the database), running in a **bridge network**.
+
+### `docker-compose.yml`:
+
+```yaml
+version: "3.8"
+
+services:
+  # Backend Service (ITalk API)
+  solaris-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always  # Ensures the service restarts automatically
+    depends_on:
+      - postgres  # Ensures PostgreSQL starts before the backend
+    env_file:
+      - .env  # Load environment variables from .env file
+    ports:
+      - "${APP_PORT}:3000"  # Maps container port 3000 to APP_PORT
+    volumes:
+      - .:/usr/src/app  # Mounts the current directory to the container for live reloading
+      - /usr/src/app/node_modules  # Prevents overwriting of node_modules on host
+    command: npm run start:dev  # Command to start the app in development mode
+    networks:
+      - myapp-network  # Connects the container to the bridge network
+  
+  # PostgreSQL Service
+  postgres:
+    image: postgres:latest  # Uses the latest PostgreSQL image
+    restart: always  # Ensures the service restarts automatically
+    ports:
+      - "5436:5432"  # Maps container port 5432 (default PostgreSQL) to port 5436 on host
+    env_file:
+      - .env  # Loads environment variables from the .env file (e.g., database credentials)
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Persists PostgreSQL data in a named volume
+    networks:
+      - myapp-network  # Connects PostgreSQL to the bridge network
+  
+networks:
+  # Custom bridge network for inter-service communication
+  myapp-network:
+    driver: bridge
+
+volumes:
+  # Persistent volume for PostgreSQL data
+  db_data:
+```
+## 🤝 Contributing
+
+Official Deployment Coming soon!  
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
