@@ -65,7 +65,7 @@ This repository contains the backend services that power the **ITalk** platform.
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/italk-backend.git
+git clone https://github.com/DavidAslanyan/ITalk-Backend.git
 cd italk-backend
 ```
 
